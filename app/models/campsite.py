@@ -1,5 +1,4 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
 class Campsite(db.Model):
     __tablename__ = "campsites"
 
@@ -10,7 +9,9 @@ class Campsite(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     title = db.Column(db.String(255), nullable=False)
     address = db.Column(db.String(255), nullable=False)
-    hours = db.Integer(db.String(255), nullable=False)
+    hours_open = db.Column(db.Time(), nullable=False)
+    hours_close = db.Column(db.Time(), nullable=False)
+    phone_number = db.Column(db.String(12), nullable = False)
     image = db.Column(db.String(255), nullable=False)
 #relationship attributes    
     users = db.relationship("User", back_populates="campsites")
