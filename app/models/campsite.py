@@ -11,8 +11,9 @@ class Campsite(db.Model):
     address = db.Column(db.String(255), nullable=False)
     hours_open = db.Column(db.Time(), nullable=False)
     hours_close = db.Column(db.Time(), nullable=False)
-    phone_number = db.Column(db.String(12), nullable = False)
+    phone_number = db.Column(db.String(11), nullable = False)
     image = db.Column(db.String(255), nullable=False)
+    prev_image = db.Column(db.String(255), nullable=False)
 #relationship attributes    
     users = db.relationship("User", back_populates="campsites")
     attractions= db.relationship("Attraction", back_populates="campsites")
@@ -24,8 +25,11 @@ class Campsite(db.Model):
             "user": self.users.to_dict(),
             "title": self.title,
             "address": self.address,
-            "hours": self.hours,
+            "hours_open": self.hours_open.strftime("%H:%M"),
+            "hours_close": self.hours_close.strftime("%H:%M"),
+            "phone_number": self.phone_number,
             "image": self.image,
+            "prev_image":self.prev_image,
             "reviews":[review.to_dict() for review in self.reviews],
             "attractions":[attraction.to_dict() for attraction in self.attractions],
             "reviews_count": len(self.reviews),
