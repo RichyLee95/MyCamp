@@ -16,7 +16,7 @@ class Review(db.Model):
     #Relationships
     users = db.relationship("User", back_populates="reviews")
     campsites = db.relationship("Campsite", back_populates="reviews")
-    likes = db.relationship("Like", back_populates="reviews")
+    likes = db.relationship("Like", back_populates="reviews",cascade="all, delete")
 
     #dict
     def to_dict(self):

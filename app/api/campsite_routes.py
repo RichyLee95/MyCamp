@@ -99,7 +99,7 @@ def update_campsite(id):
       upload_prev = upload_file_to_s3(prev_image)
       campsite_to_update.prev_image=upload_prev["url"]
 
-    campsite_to_update.user = current_user
+    campsite_to_update.user = current_user.id
     campsite_to_update.title = form.data["title"]
     campsite_to_update.hours_open = form.data["hours_open"]
     campsite_to_update.hours_close = form.data["hours_close"]
@@ -118,6 +118,8 @@ def delete_campsite(id):
   if campsite_to_delete.users.id != current_user.id:
     return jsonify({'error': 'You are not authorized to delete this campsite'}), 401
 
+  remove_file_from_s3(campsite_to_delete.image)
+  remove_file_from_s3(campsite_to_delete.prev_image)
   db.session.delete(campsite_to_delete)
   db.session.commit()
   return {"message": "Successfully deleted!"}

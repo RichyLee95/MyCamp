@@ -17,8 +17,8 @@ class Campsite(db.Model):
     prev_image = db.Column(db.String(255), nullable=False)
     #relationship attributes    
     users = db.relationship("User", back_populates="campsites")
-    attractions= db.relationship("Attraction", back_populates="campsites")
-    reviews = db.relationship("Review", back_populates="campsites")
+    attractions= db.relationship("Attraction", back_populates="campsites", cascade="all, delete")
+    reviews = db.relationship("Review", back_populates="campsites",cascade="all, delete")
 
     def to_dict(self):
         return {
