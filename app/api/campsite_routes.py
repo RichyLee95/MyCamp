@@ -13,12 +13,13 @@ campsite_routes = Blueprint("campsites", __name__)
 @campsite_routes.route("/all")
 def all_campsites():
 
-  all_campsites = Campsite.all()
+  all_campsites = Campsite.query.all()
   response_campsites = [campsite.to_dict() for campsite in all_campsites]
   return {"campsites": response_campsites }
 
 #gets all campsites of current user
 @campsite_routes.route("/current")
+@login_required
 def current_campsites():
 
   all_campsites = Campsite.query.filter_by(user_id=current_user.id).all()
@@ -41,7 +42,13 @@ def add_campsite():
 
   if form.validate_on_submit():
     new_campsite = Campsite(
-      content = form.data["content"],
+      title = form.data["title"],
+      # address =
+      # hours_open =
+      # hours_close =
+      # phone_number =
+      # image =
+      # prev_image =
       users = current_user,
     )
 
@@ -74,13 +81,10 @@ def update_campsite(id):
 
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-
+# delete a Campsite
 @campsite_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_campsite(id):
-  '''
-  delete a campsite
-  '''
   campsite_to_delete = Campsite.query.get(id)
   if campsite_to_delete.users.id != current_user.id:
     return jsonify({'error': 'You are not authorized to delete this campsite'}), 401

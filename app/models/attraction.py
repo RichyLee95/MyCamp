@@ -21,5 +21,5 @@ class Attraction(db.Model):
             "id": self.id,
             "title": self.title,
             "image":self.image,
-            "campsite_id": self.campsite_id,
+            "campsite_id": self.campsite_id
     }

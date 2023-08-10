@@ -4,7 +4,6 @@ from wtforms.validators import DataRequired, Length
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from ..api.AWS_helpers import ALLOWED_EXTENSIONS
 class CampsiteForm(FlaskForm):
-  # user_id = SelectField("Author", choices=[])
   title = StringField("Title", validators=[DataRequired(), Length(max=255, min=5)])
   address = StringField("Address", validators=[DataRequired(), Length(max=255)])
   hours_open = DateTimeField("Hours Open", validators=[DataRequired()],format="%H:%M")

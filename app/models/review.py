@@ -16,7 +16,7 @@ class Review(db.Model):
     #Relationships
     users = db.relationship("User", back_populates="reviews")
     campsites = db.relationship("Campsite", back_populates="reviews")
-
+    likes = db.relationship("Like", back_populates="reviews")
 
     #dict
     def to_dict(self):
@@ -27,5 +27,7 @@ class Review(db.Model):
             "user_id": self.user_id,
             "campsite_id": self.campsite_id,
             "created_at": self.created_at,
-            "username": self.users.username
+            "username": self.users.username,
+            "likes":[like.to_dict() for like in self.likes],
+            "likes_count": len(self.likes)
     }

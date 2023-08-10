@@ -2,7 +2,7 @@ from app.models import db, Campsite, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime, time
 
-def seed_posts():
+def seed_campsites():
     campsite1 = Campsite(
         user_id=1,
         title="Yosemite Pines Campground",
@@ -121,7 +121,7 @@ def seed_posts():
     return campsites
 
 
-def undo_posts():
+def undo_campsites():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.campsites RESTART IDENTITY CASCADE;")
     else:
