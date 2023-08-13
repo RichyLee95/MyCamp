@@ -13,7 +13,7 @@ const CreateCampsite = () => {
         hours_close: "",
         phone_number: "",
         image: "",
-        prev_image
+        prev_image: ""
 
     }
 
