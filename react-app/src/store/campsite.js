@@ -111,7 +111,7 @@ export const thunkDeleteCampsite = (campsite) => async (dispatch) => {
 const initialState = {
     allCampsites: {},
     currentCampsites: {},
-    singleCampsite: {},
+    singleCampsite: null,
 };
 
 
@@ -128,7 +128,7 @@ const initialState = {
         case GET_CAMPSITE:
             return {
               ...state,
-              singleCampsite: { ...state.singleCampsite, [action.campsite.id]: action.campsite },
+              singleCampsite: action.campsite ,
             };
           case GET_CURRENT_CAMPSITES:
             let currentCampsitesState = { ...state, currentCampsites: {} };
