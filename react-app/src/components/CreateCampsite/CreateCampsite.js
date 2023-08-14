@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 
 const CreateCampsite = () => {
-    const user = useSelector(state => state.session.user)
+
 
     const campsite = {
         title: "",

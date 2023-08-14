@@ -1,18 +1,20 @@
 import { useHistory } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
-import { thunkCreateCampsite } from '../../store/post';
 import { useState } from 'react';
+import { thunkCreateCampsite,thunkEditCampsite } from '../../store/campsite';
 
 
 const CampsiteForm = ({campsite,formType}) => {
-const [title,setTitle] = useState(campsite.title)
-const [address,setAddress] = useState(campsite.address)
-const [hours_open,setHours_open] = useState(campsite.hours_open)
-const [hours_close,setHours_close] = useState(campsite.hours_close)
-const [phone_number,setPhone_number] = useState(campsite.phone_number)
-const [image,setImage] = useState(campsite.image)
-const [prev_image,setPrev_image] = useState(campsite.prev_image)
-const [validationErrors, setValidationErrors] = useState("")
+    const history = useHistory()
+    const dispatch = useDispatch()
+    const [title,setTitle] = useState(campsite?.title)
+    const [address,setAddress] = useState(campsite?.address)
+    const [hours_open,setHours_open] = useState(campsite?.hours_open)
+    const [hours_close,setHours_close] = useState(campsite?.hours_close)
+    const [phone_number,setPhone_number] = useState(campsite?.phone_number)
+    const [image,setImage] = useState(campsite?.image)
+    const [prev_image,setPrev_image] = useState(campsite?.prev_image)
+    const [validationErrors, setValidationErrors] = useState("")
 
 const handleSubmit = async(e) =>{
     e.preventDefault()
@@ -38,11 +40,14 @@ const handleSubmit = async(e) =>{
     if (!prev_image) errors.prev_image = "Campsite preview image is required"
 
     setValidationErrors(errors)
-    if (formType === "Create Campsite" && !Object.keys(errors).length){
+    if (formType === "Create Campsite"){
         await dispatch(thunkCreateCampsite(formData))
-        history.pushState("/campsites")
+        history.push("/campsites/current")
     }
-
+    if (formType === "Edit Campsite"){
+        await dispatch(thunkEditCampsite(formData,campsite.id))
+        history.push("/campsites/current")
+    }
 
 
 }
@@ -53,6 +58,7 @@ return (
     <div>
         {formType === "Create Campsite" ? (<h1>Create a Campsite!</h1>): (<h1>Edit your Campsite!</h1>)}
     </div>
+
     <div>
     {validationErrors.title ? (<p className="errors">{validationErrors.content}</p>) : ''}
     <input 
@@ -92,6 +98,8 @@ return (
     type='tel'
     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
     value={phone_number}
+    minLength="12"
+    maxLength="12"
     onChange={(e) => setPhone_number(e.target.value)}/>
     </div>
     <div className='create-image-upload'>

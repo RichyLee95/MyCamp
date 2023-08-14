@@ -64,7 +64,7 @@ export const fetchSingleCampsite = (campsiteId) => async (dispatch) => {
 };
 
 export const thunkCreateCampsite = (formData) => async (dispatch) => {
-    const response = await fetch("/api/campsites", {
+    const response = await fetch("/api/campsites/new", {
         method: "POST",
         body: formData,
     });
@@ -77,13 +77,10 @@ export const thunkCreateCampsite = (formData) => async (dispatch) => {
     return data.campsites
 };
 
-export const thunkEditCampsite = (id, content) => async (dispatch) => {
-    const response = await fetch(`/api/campsites/${id}`, {
+export const thunkEditCampsite = (formData, campsite) => async (dispatch) => {
+    const response = await fetch(`/api/campsites/${campsite}/edit`, {
         method: "PUT",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        body: content,
+        body: formData,
     });
 
     if (!response.ok) {
@@ -111,34 +108,72 @@ export const thunkDeleteCampsite = (campsite) => async (dispatch) => {
 const initialState = {
     allCampsites: {},
     currentCampsites: {},
-    singleCampsite: null,
+    singleCampsite: {},
 };
 
 
   //Reducer
   export default function campsitesReducer(state = initialState, action) {
     switch (action.type) {
-      case GET_ALL_CAMPSITES:
-        let campsiteState = { ...state, allCampsites: {} };
+      case GET_ALL_CAMPSITES:{
+        let campsiteState = { 
+            ...state,
+             allCampsites: {}
+             };
         action.campsites.forEach((campsite) => {
           campsiteState.allCampsites[campsite.id] = campsite;
         });
         return campsiteState;
-
-        case GET_CAMPSITE:
+        }
+        case GET_CAMPSITE:{
             return {
               ...state,
-              singleCampsite: action.campsite ,
+              allCampsites:{ 
+                ...state.allCampsites,
+                [action.campsite.id]:action.campsite
+              }
             };
-          case GET_CURRENT_CAMPSITES:
-            let currentCampsitesState = { ...state, currentCampsites: {} };
+            }
+          case GET_CURRENT_CAMPSITES:{
+            let currentCampsitesState = {
+                ...state,
+                 currentCampsites: {}
+                 };
             action.campsites.forEach((campsite) => {
-              currentCampsitesState[campsite.id] = campsite;
+              currentCampsitesState.currentCampsites[campsite.id] = campsite;
             });
-            return {
-              ...state,
-              currentCampsites: currentCampsitesState,
-            };
+            return currentCampsitesState
+            }
+            case ADD_CAMPSITE:{
+            return{
+                ...state,
+                allCampsite:{
+                    ...state.allCampsites,
+                    [action.campsite.id]:action.campsite,
+                },
+            }
+            }
+            case UPDATE_CAMPSITE:{
+                return {
+                    ...state,
+                    allCampsites:{
+                        ...state.allCampsites,
+                        [action.campsite.id]:action.campsite
+                    },
+                    }
+                    }
+            case REMOVE_CAMPSITE:{
+                const campsiteToDelete = {
+                    ...state,
+                    currentCampsites:{...state.currentCampsites},
+                    allCampsites:{
+                        ...state.allCampsites
+                    }
+                }
+                delete campsiteToDelete.allCampsites[action.campsiteId]
+                delete campsiteToDelete.currentCampsites[action.campsiteId]
+                return campsiteToDelete
+            }
       default:
         return state;
     }

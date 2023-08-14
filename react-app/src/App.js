@@ -7,6 +7,9 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import CampsiteIndex from "./components/HomePage/CampsiteIndex";
 import SingleCampsite from "./components/SingleCampsite/SingleCampsite";
+import ManageCampsites from "./components/ManageCampsite/ManageCampsite";
+import CreateCampsite from "./components/CreateCampsite/CreateCampsite";
+import EditCampsite from "./components/CreateCampsite/EditCampsite";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -20,14 +23,20 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path='/' component={CampsiteIndex}/>
-          
           <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route exact path='/campsites/current' component={ManageCampsites}/>
+          <Route exact path='/campsites/new' component={CreateCampsite}/>
           <Route exact path="/campsites/:campsiteId" component={SingleCampsite}/>
+          
+          <Route exact path='/campsites/:campsiteId/edit' component={EditCampsite}/>
+          
+          
+          
         </Switch>
       )}
     </>
