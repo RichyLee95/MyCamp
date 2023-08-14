@@ -40,6 +40,7 @@ const handleSubmit = async(e) =>{
     if (!prev_image) errors.prev_image = "Campsite preview image is required"
 
     setValidationErrors(errors)
+    if(Object.keys(errors).length < 0){
     if (formType === "Create Campsite"){
         await dispatch(thunkCreateCampsite(formData))
         history.push("/campsites/current")
@@ -48,7 +49,7 @@ const handleSubmit = async(e) =>{
         await dispatch(thunkEditCampsite(formData,campsite.id))
         history.push("/campsites/current")
     }
-
+}
 
 }
 
@@ -58,9 +59,10 @@ return (
     <div>
         {formType === "Create Campsite" ? (<h1>Create a Campsite!</h1>): (<h1>Edit your Campsite!</h1>)}
     </div>
-
+    
     <div>
     {validationErrors.title ? (<p className="errors">{validationErrors.content}</p>) : ''}
+    <p>What is the name of the campsite?</p>
     <input 
     placeholder='What is the name of the campsite?'
     type='text'
@@ -69,6 +71,7 @@ return (
     </div>
     <div>
     {validationErrors.address ? (<p className="errors">{validationErrors.address}</p>) : ''}
+    <p>What is the address of the campsite?</p>
     <input 
     placeholder='What is the address of the campsite?'
     type='text'
@@ -77,6 +80,7 @@ return (
     </div>
     <div>
     {validationErrors.hours_open ? (<p className="errors">{validationErrors.hours_open}</p>) : ''}
+    <p>What hours are the campsite open?</p>
     <input 
     placeholder='What hours are the campsite open?'
     type='time'
@@ -85,6 +89,7 @@ return (
     </div>
     <div>
     {validationErrors.hours_close ? (<p className="errors">{validationErrors.hours_close}</p>) : ''}
+    <p>What hours are the campsite closed?</p>
     <input 
     placeholder='What hours are the campsite closed?'
     type='time'
@@ -93,8 +98,9 @@ return (
     </div>
     <div>
     {validationErrors.phone_number ? (<p className="errors">{validationErrors.phone_number}</p>) : ''}
+    <p>What is the phone number of the campsite? Phone number must be in the format 123-456-7899</p>
     <input 
-    placeholder='What is the phone number of the campsite?'
+    placeholder='Phone number'
     type='tel'
     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
     value={phone_number}
@@ -105,16 +111,18 @@ return (
     <div className='create-image-upload'>
     <div>
     {validationErrors.image ? (<p className="errors">{validationErrors.image}</p>) : ''}
+    <p>Input an image of your campsite</p>
     <input 
-    placeholder='Input image of your campsite!'
+    placeholder='Campsite image'
     type='file'
     accept='image/*'
     onChange={(e) => setImage(e.target.files[0])}/>
     </div>
     <div>
     {validationErrors.prev_image ? (<p className="errors">{validationErrors.prev_image}</p>) : ''}
+    <p>Input a preview image of your campsite</p>
     <input 
-    placeholder='Input a preview image of your campsite!'
+    placeholder='Preview image'
     type='file'
     accept='image/*'
     onChange={(e) => setPrev_image(e.target.files[0])}/>

@@ -1,7 +1,46 @@
 .profile-dropdown {
   position: absolute;
+  top: 60px;
+  right: 10px;
+  /* padding-left: 7px; */
+  /* margin-top: 34px; */
 }
 
 .hidden {
   display: none;
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height:90px;
+}
+.nav-searchbar{
+padding-left: 40px;
+align-items: center;
+}
+.nav-searchbar input{
+  height: 40px;
+  width: 200px;
+  border-radius: 10px;
+
+  color: black;
+}
+.nav-searchbar button{
+  height: 40px;
+  border-radius: 10px;
+}
+.nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.logo{
+  object-fit: cover;
+  width:180px;
+  height:70px;
+  max-width:100%;
+max-height:100%;
 }

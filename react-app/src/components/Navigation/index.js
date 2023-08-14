@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-
+import logo from '../../images/mycamp-logo.jpg'
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 	const [searchInput, setSearchInput] = useState('');
@@ -16,9 +16,12 @@ function Navigation({ isLoaded }){
 	}
 	return (
 		<div className='nav-container'>
-			<div className='nav-logo'>
-				<NavLink exact to="/">Home</NavLink>
-			</div>
+			<div className='nav'>
+
+				<NavLink exact to="/">
+					<img className="logo" src={logo} alt="Home" />
+					</NavLink>
+
 			<form className='nav-searchbar' onSubmit={handleReserve}>
 			<input
 						type="text"
@@ -28,6 +31,7 @@ function Navigation({ isLoaded }){
 					/>
 					<button type="submit">Search</button>
 				</form>
+				</div>
 			<div className='nav-profile'>
 			{isLoaded && (
 				<div>

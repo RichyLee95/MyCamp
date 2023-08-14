@@ -4,7 +4,7 @@ import { fetchCurrentCampsites } from '../../store/campsite';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import DeleteCampsite from '../CreateCampsite/DeleteCampsite';
 import OpenModalButton from '../OpenModalButton';
-
+import './ManageCampsite.css'
 
 const ManageCampsites = () => {
     const dispatch = useDispatch()
@@ -19,12 +19,13 @@ const ManageCampsites = () => {
 
 return (
     <div className='manage-campsite-container'>
+        <div className='manage-title'><h2 >{currentUser.username}'s Campsites</h2></div>
         <div className='manage-campsite'>
             {currentUserCampsite.map(campsite => (
                 <div className='single-managed-campsite'>
-                    <Link to={`/campsites/${campsite.id}`}>
-                    <div className='campsite-prev-img'>
-                    <img alt='' src={campsite.prev_image} />
+                    <Link className='campsite-link' to={`/campsites/${campsite.id}`}>
+                    <div >
+                    <img className='campsite-prev-img' alt='' src={campsite.prev_image} />
                     </div>
                         <h2 className='campsite-title'>{campsite.title}</h2>
                     </Link>
