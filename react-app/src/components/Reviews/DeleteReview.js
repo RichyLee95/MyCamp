@@ -1,18 +1,19 @@
-import { thunkRemoveReview } from "../../store/review"
+import { fetchAllReviews, thunkRemoveReview } from "../../store/review"
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { fetchSingleCampsite } from "../../store/campsite";
 
 
-const DeleteReview = ({ reviewId,campsiteId }) => {
+const DeleteReview = ({ review,campsiteId }) => {
     const {closeModal} = useModal()
     const history = useHistory()
     const dispatch = useDispatch()
     const handleDelete =async (e) => {
         e.preventDefault()
-       await dispatch(thunkRemoveReview(reviewId))
+       await dispatch(thunkRemoveReview(review.id))
         dispatch(fetchSingleCampsite(campsiteId))
+        dispatch(fetchAllReviews(campsiteId))
         .then(closeModal)
     }
 

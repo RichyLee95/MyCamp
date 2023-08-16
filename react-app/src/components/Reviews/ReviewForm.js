@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchAllReviews, fetchCurrentReviews, thunkCreateReview } from '../../store/review';
+import { fetchAllReviews, fetchCurrentReviews, thunkCreateReview, thunkEditReview } from '../../store/review';
 import { useModal } from '../../context/Modal';
 import './ReviewForm.css'
-const ReviewForm = ({ review, formType,disabled }) => {
+const ReviewForm = ({ review,campsiteId,reviewId, formType,disabled }) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const {closeModal} =useModal()
@@ -25,10 +25,15 @@ const ReviewForm = ({ review, formType,disabled }) => {
             stars
         }
         if (formType === "Create Review"){
-            await dispatch(thunkCreateReview(review))
+            await dispatch(thunkCreateReview(campsiteId,review))
             dispatch(fetchAllReviews())
             dispatch(fetchCurrentReviews())
-            console.log('review data',review)
+            .then(closeModal)
+        }
+        if(formType === "Edit Review"){
+            await dispatch(thunkEditReview(reviewId,review))
+            dispatch(fetchAllReviews())
+            dispatch(fetchCurrentReviews())
             .then(closeModal)
         }
     }

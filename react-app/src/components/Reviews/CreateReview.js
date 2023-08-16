@@ -1,6 +1,6 @@
 import ReviewForm from "./ReviewForm";
 
-const CreateReview = () => {
+const CreateReview = ({campsiteId}) => {
 
     const review = {
         review_text:"",
@@ -9,6 +9,7 @@ const CreateReview = () => {
     return (
         <ReviewForm
         review={review}
+        campsiteId={campsiteId}
         formType="Create Review"/>
     )
 }

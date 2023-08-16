@@ -62,6 +62,7 @@ export const thunkEditReview = (reviewId, review) => async (dispatch) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify( review )
+        
     });
     if (response.ok) {
         const reviewdata = await response.json();

@@ -57,10 +57,10 @@ return (
                 <div className='review-text'>{review.review_text}</div>
                 <div className='edit-delete-container'>
                     {loggedInUser?.id === review.user_id ?
-                <div className='review-delete'><OpenModalButton buttonText='Delete Review' modalComponent={<DeleteReview review={review}/>}/></div>
+                <div className='review-delete'><OpenModalButton buttonText='Delete Review' modalComponent={<DeleteReview campsiteId={campsiteId} review={review}/>}/></div>
                 :null}
                 {loggedInUser?.id === review.user_id ?
-                <div className='review-edit'><OpenModalButton buttonText='Edit Review' modalComponent={<EditReview review={review}/>}/></div>
+                <div className='review-edit'><OpenModalButton buttonText='Edit Review' modalComponent={<EditReview  review={review}/>}/></div>
                 :null}
             </div>
             </div>
