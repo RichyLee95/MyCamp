@@ -2,16 +2,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import { fetchAllCampsites } from '../../store/campsite';
+
 import './CampsiteIndex.css'
+import { fetchAllReviews } from '../../store/review';
 const CampsiteIndex = () => {
     const dispatch = useDispatch()
     const allCampsitesObj = useSelector(state => state.campsites.allCampsites)
     const allCampsites = Object.values(allCampsitesObj)
-
-
+    // const allReviewsObj = useSelector(state => state.reviews.allReviews)
+    // const allReviews = Object.values(allCampsitesObj)
 
     useEffect(() =>{
         dispatch(fetchAllCampsites())
+        dispatch(fetchAllReviews())
     }, [dispatch])
     return (
         <div className='index-container'>
@@ -34,6 +37,7 @@ const CampsiteIndex = () => {
                             </div>    
                                 <div className='index-campsite-title-rating'>
                                     <p className='index-campsite-title'>{campsite.title}</p>
+                                    {/* <p className='index-campsite-review'>{campsite.}</p> */}
                                      {/* <p className='campsite rating'>{}</p>  */}
                                 </div>
                             

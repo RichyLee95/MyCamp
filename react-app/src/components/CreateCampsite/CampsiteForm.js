@@ -40,13 +40,13 @@ const handleSubmit = async(e) =>{
     if (!prev_image) errors.prev_image = "Campsite preview image is required"
 
     setValidationErrors(errors)
-    if(Object.keys(errors).length < 0){
+    if(Object.keys(errors).length === 0){
     if (formType === "Create Campsite"){
         await dispatch(thunkCreateCampsite(formData))
         history.push("/campsites/current")
     }
-    if (formType === "Edit Campsite"){
-        await dispatch(thunkEditCampsite(formData,campsite.id))
+    else if (formType === "Edit Campsite"){
+        await dispatch(thunkEditCampsite(formData,campsite))
         history.push("/campsites/current")
     }
 }
@@ -61,7 +61,7 @@ return (
     </div>
     
     <div>
-    {validationErrors.title ? (<p className="errors">{validationErrors.content}</p>) : ''}
+    {validationErrors.title ? (<p className="errors">{validationErrors.title}</p>) : ''}
     <p>What is the name of the campsite?</p>
     <input 
     placeholder='What is the name of the campsite?'

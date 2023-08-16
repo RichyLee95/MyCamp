@@ -1,0 +1,15 @@
+.rating-input .filled {
+    color: saddlebrown;
+  }
+  
+  .rating-input .empty {
+    color: burlywood;
+  }
+  .rating-input {
+    display: flex;
+    margin-right: 4px;
+  }
+.review-text-block{
+  font-weight: bold;
+  padding: 8px;
+}

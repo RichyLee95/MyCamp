@@ -78,7 +78,7 @@ export const thunkCreateCampsite = (formData) => async (dispatch) => {
 };
 
 export const thunkEditCampsite = (formData, campsite) => async (dispatch) => {
-    const response = await fetch(`/api/campsites/${campsite}/edit`, {
+    const response = await fetch(`/api/campsites/${campsite.id}/edit`, {
         method: "PUT",
         body: formData,
     });
@@ -128,10 +128,8 @@ const initialState = {
         case GET_CAMPSITE:{
             return {
               ...state,
-              allCampsites:{ 
-                ...state.allCampsites,
-                [action.campsite.id]:action.campsite
-              }
+              singleCampsite:action.campsite
+              
             };
             }
           case GET_CURRENT_CAMPSITES:{
