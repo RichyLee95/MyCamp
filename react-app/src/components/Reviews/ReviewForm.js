@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { fetchAllReviews, fetchCurrentReviews, thunkCreateReview, thunkEditReview } from '../../store/review';
 import { useModal } from '../../context/Modal';
 import './ReviewForm.css'
+import { fetchSingleCampsite } from '../../store/campsite';
 const ReviewForm = ({ review,campsiteId,reviewId, formType,disabled }) => {
     const history = useHistory()
     const dispatch = useDispatch()
@@ -17,25 +18,31 @@ const ReviewForm = ({ review,campsiteId,reviewId, formType,disabled }) => {
         e.preventDefault()
         let errors = {}
         if (!review_text) errors.review_text = 'Review input required'
+        if (review_text.trim().length === 0) errors.review_text = 'Review input cannot be whitespace'
         if(!stars) errors.stars = "Star rating must be chosen"
+
         setValidationErrors(errors)
         review = {
             ...review,
             review_text,
             stars
         }
+        if (Object.keys(errors).length === 0) {
         if (formType === "Create Review"){
             await dispatch(thunkCreateReview(campsiteId,review))
             dispatch(fetchAllReviews())
             dispatch(fetchCurrentReviews())
+            dispatch(fetchSingleCampsite(campsiteId))
             .then(closeModal)
         }
         if(formType === "Edit Review"){
             await dispatch(thunkEditReview(reviewId,review))
             dispatch(fetchAllReviews())
             dispatch(fetchCurrentReviews())
+            dispatch(fetchSingleCampsite(campsiteId))
             .then(closeModal)
         }
+    }
     }
     const onChange = (number) => {
         setStars(parseInt(number));

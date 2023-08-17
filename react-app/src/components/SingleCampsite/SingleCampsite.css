@@ -1,0 +1,7 @@
+.single-campsite-container{
+    /* margin-left: 20%;
+    margin-right: 20%; */
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}

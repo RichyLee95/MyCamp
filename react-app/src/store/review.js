@@ -114,7 +114,7 @@ export default function reviewsReducer(state = initialState, action) {
         case UPDATE_REVIEW:{
             return {
                 ...state,
-                allreviews:{
+                allReviews:{
                     ...state.allReviews,
                     [action.review.id]:action.review
                 },

@@ -9,8 +9,7 @@ const CampsiteIndex = () => {
     const dispatch = useDispatch()
     const allCampsitesObj = useSelector(state => state.campsites.allCampsites)
     const allCampsites = Object.values(allCampsitesObj)
-    // const allReviewsObj = useSelector(state => state.reviews.allReviews)
-    // const allReviews = Object.values(allCampsitesObj)
+    
 
     useEffect(() =>{
         dispatch(fetchAllCampsites())
