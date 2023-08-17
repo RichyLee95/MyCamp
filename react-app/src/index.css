@@ -11,3 +11,22 @@ max-height: 400px;
     text-decoration: none;
     color: black;
   }
+  .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
+
+  }
+  .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .fa-star-o{
+    background-color: orange;
+    color:white;
+    
+  }

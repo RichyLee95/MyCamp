@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { thunkCreateCampsite, thunkEditCampsite } from '../../store/campsite';
-
+import './CampsiteForm.css'
 
 const CampsiteForm = ({ campsite, formType }) => {
     const history = useHistory()

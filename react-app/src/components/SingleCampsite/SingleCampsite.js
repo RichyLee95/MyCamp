@@ -53,10 +53,10 @@ const SingleCampsite = () => {
                 avgStars(campsite.reviews)):(<p>No Reviews, be the first to write one!</p>)}
 
                     {campsite.reviews_count === 1 ? 
-                (<h3>({campsite.reviews_count} review)</h3>)
+                (<h3 className='review-title'>({campsite.reviews_count} review)</h3>)
                 : ''}
                 {campsite.reviews_count > 1 ? 
-                (<h3>({campsite.reviews_count} reviews)</h3>)
+                (<h3 className='review-title'>({campsite.reviews_count} reviews)</h3>)
                 : ''}
 
 
@@ -113,11 +113,11 @@ const SingleCampsite = () => {
                     {campsiteReviews.map(review => (
                         <div className='review' key={review.id}>
                             <div className='review-name'>{review.username}</div>
-                            <div className='review-rating'>{review.stars === 1 ? (<h2><i className="fa fa-star" /></h2>) : ''}
-                                {review.stars === 2 ? (<h2><i className="fa fa-star" /><i className="fa fa-star" /></h2>) : ''}
-                                {review.stars === 3 ? (<h2><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></h2>) : ''}
-                                {review.stars === 4 ? (<h2><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></h2>) : ''}
-                                {review.stars === 5 ? (<h2><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></h2>) : ''}
+                            <div className='review-rating'>{review.stars === 1 ? (<p><i className="fa fa-star" /></p>) : ''}
+                                {review.stars === 2 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
+                                {review.stars === 3 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
+                                {review.stars === 4 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
+                                {review.stars === 5 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
                             </div>
                             <div className='review-date'>{review.created_at}</div>
                             <div className='review-text'>{review.review_text}</div>
