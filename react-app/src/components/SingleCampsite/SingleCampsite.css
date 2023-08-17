@@ -17,13 +17,21 @@
   .text-image{
 position: absolute;
 top:120px;
+left:320px;
 
+
+  }
+  .review-title{
+    color:white
   }
   .title {
     font-size: 24px;
     font-weight: bold;
+    color:white;
   }
-  
+  .single-campsite-title{
+width:100%;
+  }
   .single-campsite-title p {
     font-size: 14px;
     color: #666;
