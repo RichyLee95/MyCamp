@@ -20,7 +20,7 @@ const SingleCampsite = () => {
         state.session.user)
 
     const userReview = campsiteReviews.find(review => review.user_id === loggedInUser?.id)
-    function avgRatingfunc(review) {
+    const avgStars=(campsiteReviews)=> {
         const totalStars = campsiteReviews.reduce((sum, review) => sum + review.stars, 0)
         const avgRating = totalStars / campsiteReviews.length
 
@@ -35,24 +35,20 @@ const SingleCampsite = () => {
                 starsArray.push(<i key={i} className="fa fa-star-o" />);
             }
         }
-        return (
-            <div className='average-rating-stars'>
-                {starsArray.map(star => star)}
-            </div>
-        )
+        return starsArray
     }
     useEffect(() => {
         dispatch(fetchSingleCampsite(campsiteId))
         dispatch(fetchAllReviews())
     }, [dispatch])
     if (!campsite) return null
-    console.log(reviews)
     return (
         <div className='single-campsite-container'>
             <div className='single-campsite-title'>
                 <img src={campsite.image} />
                 <h2 className='title'>{campsite.title}</h2>
-                {avgRatingfunc(campsite.reviews)}
+                {campsiteReviews.length > 0 ? (
+                avgStars(campsite.reviews)):(<p>No Reviews, be the first to write one!</p>)}
                 {/* <h3>{avgRating.toFixed(2)}{avgRating.toFixed(2) <= 0.5?(<h2><i className="fa fa-star-half" /></h2>):'' }</h3>
             <h3>{avgRating.toFixed(2) <= 1?(<h2><i className="fa fa-star" /></h2>):'' }</h3>
             <h3>{avgRating.toFixed(2) <= 1.5?(<h2><i className="fa fa-star" /><i className="fa fa-star-half" /></h2>):'' }</h3>
