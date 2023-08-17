@@ -1,9 +1,12 @@
 .rating-input .filled {
-    color: saddlebrown;
+  color: white !important;
+background-color: orange;
+
   }
   
   .rating-input .empty {
-    color: burlywood;
+    color: white !important;
+    background-color: gray;
   }
   .rating-input {
     display: flex;

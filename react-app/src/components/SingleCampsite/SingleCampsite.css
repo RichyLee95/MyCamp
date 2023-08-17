@@ -21,6 +21,25 @@ left:320px;
 
 
   }
+  .text-image .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
+
+  }
+  .text-image .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .text-image .fa-star-o{
+    background-color: orange;
+    color:white;
+    
+  }
   .review-title{
     color:white
   }
@@ -125,4 +144,61 @@ width:100%;
   hr{
     border-bottom: 2px #ccc;
     width: 100%;
+  }
+  /* .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
+
+  }
+  .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .fa-star-o{
+    background-color: orange;
+    color:white;
+    
+  } */
+  .overall-rating .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
+
+  }
+  .overall-rating .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .overall-rating .fa-star-o{
+    background-color: orange;
+    color:white;
+    
+  }
+  .review-rating .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
+
+  }
+  .review-rating .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .review-rating .fa-star-o{
+    background-color: orange;
+    color:white;
+    
   }

@@ -71,4 +71,41 @@
     object-fit: cover;
     border-radius: 4px;
 }
+.avgerage-rating-stars .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
 
+  }
+  .avgerage-rating-stars .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .avgerage-rating-stars .fa-star-o{
+    background-color: orange;
+    color:white;
+    
+  }
+  .campsite-index .fa-star {
+    background-color: orange;
+    color: white;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+  }
+  
+  .campsite-index .fa-star-half {
+    background-color: orange;
+    color: white;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .campsite-index .fa-star-o {
+    background-color: orange;
+    color: white;
+  }

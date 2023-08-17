@@ -77,7 +77,7 @@ const CampsiteIndex = () => {
                                     <p className='top-index-campsite-title'>{campsite.title}</p>
                                     {/* <p className='index-campsite-review'>{campsite.}</p> */}
                                     {/* <p className='campsite rating'>{}</p>  */}
-                                    <div className='average-rating-stars'>
+                                    <div className='average-rating-stars campsite-index'>
                                         {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@ const CampsiteIndex = () => {
                                     <p className='index-campsite-title'>{campsite.title}</p>
                                     {/* <p className='index-campsite-review'>{campsite.}</p> */}
                                     {/* <p className='campsite rating'>{}</p>  */}
-                                    <div className='average-rating-stars'>
+                                    <div className='average-rating-stars campsite-index'>
                                         {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
                                     </div>
                                 </div>
