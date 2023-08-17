@@ -1,0 +1,28 @@
+.about-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 100px;
+
+}
+
+.about-containers {
+    margin-right: 20px;
+}
+
+.fa-github,
+.fa-linkedin,
+.fa-envelope {
+    margin-left: 5px;
+    color: black
+}
+
+.about-text {
+    color: black
+}
+
+.fa-github:hover,
+.fa-linkedin:hover,
+.fa-envelope:hover {
+    color: black;
+}

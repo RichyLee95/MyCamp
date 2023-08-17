@@ -33,7 +33,7 @@ def get_campsite_by_id(id):
   return {"campsite": single_campsite.to_dict()}
 
 # create a new campsite
-@campsite_routes.route("", methods=["POST"])
+@campsite_routes.route("/new", methods=["POST"])
 @login_required
 def add_campsite():
   form = CampsiteForm()
@@ -72,7 +72,7 @@ def add_campsite():
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 # update a new Campsite
-@campsite_routes.route("/<int:id>", methods=["PUT"])
+@campsite_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def update_campsite(id):
   form = CampsiteForm()
