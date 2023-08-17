@@ -5,6 +5,7 @@ import { fetchAllCampsites } from '../../store/campsite';
 import Splashpic from '../../images/wildcamping.jpg'
 import './CampsiteIndex.css'
 import { fetchAllReviews } from '../../store/review';
+import About from '../Footer/Footer';
 const CampsiteIndex = () => {
     const dispatch = useDispatch()
     const allCampsitesObj = useSelector(state => state.campsites.allCampsites)
@@ -85,6 +86,8 @@ const CampsiteIndex = () => {
                         </div>
                     ))}
                 </div>
+                <hr className='top-all-break'/>
+                {/* <div className='top-all-break'/> */}
                 {/* </div> */}
                 <div className='all-campsites-container'>
                     {allCampsites.map(campsite => (
@@ -110,6 +113,7 @@ const CampsiteIndex = () => {
 
                 </div>
             </div>
+            <About/>
         </div>
     )
 }

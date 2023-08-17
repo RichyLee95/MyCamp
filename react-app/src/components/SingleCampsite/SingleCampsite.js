@@ -21,8 +21,8 @@ const SingleCampsite = () => {
 
     const userReview = campsiteReviews.find(review => review.user_id === loggedInUser?.id)
     const avgStars=(campsiteReviews)=> {
-        const totalStars = campsiteReviews.reduce((sum, review) => sum + review.stars, 0)
-        const avgRating = totalStars / campsiteReviews.length
+        const totalStars = campsiteReviews?.reduce((sum, review) => sum + review.stars, 0)
+        const avgRating = totalStars / campsiteReviews?.length
 
         const avgRounded = Math.round(avgRating * 2) / 2;
         const starsArray = [];
@@ -45,28 +45,59 @@ const SingleCampsite = () => {
     return (
         <div className='single-campsite-container'>
             <div className='single-campsite-title'>
-                <img src={campsite.image} />
+                <img className='campsite-image' src={campsite.image} />
+                <div className='text-image'>
                 <h2 className='title'>{campsite.title}</h2>
+                
                 {campsiteReviews.length > 0 ? (
                 avgStars(campsite.reviews)):(<p>No Reviews, be the first to write one!</p>)}
-                {/* <h3>{avgRating.toFixed(2)}{avgRating.toFixed(2) <= 0.5?(<h2><i className="fa fa-star-half" /></h2>):'' }</h3>
-            <h3>{avgRating.toFixed(2) <= 1?(<h2><i className="fa fa-star" /></h2>):'' }</h3>
-            <h3>{avgRating.toFixed(2) <= 1.5?(<h2><i className="fa fa-star" /><i className="fa fa-star-half" /></h2>):'' }</h3>
-            <h3>{avgRating.toFixed(2) <= 2?(<h2><i className="fa fa-star" /><i className="fa fa-star" /></h2>):'' }</h3>
-            <h3>{avgRating.toFixed(2) <= 2.5?(<h2><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star-half" /></h2>):'' }</h3>
-            <h3>{avgRating.toFixed(2) <= 3?(<h2><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></h2>):'' }</h3>
-            <h3>{avgRating.toFixed(2) <= 3.5?(<h2><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star-half" /></h2>):'' }</h3>
-            <h3>{avgRating.toFixed(2) <= 4?(<h2><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></h2>):'' }</h3>
-            <h3>{avgRating.toFixed(2) <= 4.5?(<h2><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star-half" /></h2>):'' }</h3>
-            <h3>{avgRating.toFixed(2) === 5?(<h2><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></h2>):'' } */}
+
+                    {campsite.reviews_count === 1 ? 
+                (<h3>({campsite.reviews_count} review)</h3>)
+                : ''}
+                {campsite.reviews_count > 1 ? 
+                (<h3>({campsite.reviews_count} reviews)</h3>)
+                : ''}
 
 
 
-                <h3>
-                    ({campsite.reviews_count} reviews)</h3>
 
+            </div>
+            </div>
+            {/* {loggedInUser && !userReview ?
+                (<div className='review-btn-container'>
 
+                    <OpenModalButton buttonText={"Write a Review"} modalComponent={<CreateReview campsiteId={campsiteId} />}
+                    />
 
+                </div>
+                ) : null
+            } */}
+            <div className='address-phone-container'>
+                <div className='phonenumber'>{campsite.phone_number}</div>
+                <div className='address'>{campsite.address}</div>
+            </div>
+            <div className='hours-container'>
+                <h3 className='hours-text'>Hours</h3>
+                <div className='hours-open'>
+                    Hours Open {campsite.hours_open}
+                    Hours Closed {campsite.hours_close}
+                    {/* {console.log(campsite.hours_close)} */}
+                </div>
+            </div>
+            <hr/>
+            <div className='review-title'><h3>See what the community think about this campsite</h3></div>
+            <div className='overall-rating'>
+                <p>Overall rating</p>
+                {campsiteReviews.length > 0 ? (
+                avgStars(campsite.reviews)):(<p>No Reviews, be the first to write one!</p>)}
+
+{campsite.reviews_count === 1 ? 
+                (<h3>({campsite.reviews_count} review)</h3>)
+                : ''}
+                {campsite.reviews_count > 1 ? 
+                (<h3>({campsite.reviews_count} reviews)</h3>)
+                : ''}
             </div>
             {loggedInUser && !userReview ?
                 (<div className='review-btn-container'>
@@ -77,18 +108,6 @@ const SingleCampsite = () => {
                 </div>
                 ) : null
             }
-            <div className='address-phone-container'>
-                <div className='phonenumber'>{campsite.phone_number}</div>
-                <div className='address'>{campsite.address}</div>
-            </div>
-            <div className='hours-container'>
-                <h3 className='hours-text'>Hours</h3>
-                <div className='hours-open'>
-                    Hours Open {campsite.hours_open}
-                    Hours Closed {campsite.hours_close}
-                    {console.log(campsite.hours_close)}
-                </div>
-            </div>
             {campsiteReviews.length > 0 ? (
                 <div className='Reviews-container'>
                     {campsiteReviews.map(review => (
