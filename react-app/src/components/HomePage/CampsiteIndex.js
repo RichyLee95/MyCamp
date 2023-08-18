@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import { fetchAllCampsites } from '../../store/campsite';
 import Splashpic from '../../images/wildcamping.jpg'
+import defaultimg from '../../images/default-img.png'
 import './CampsiteIndex.css'
 import { fetchAllReviews } from '../../store/review';
 import About from '../Footer/Footer';
@@ -72,7 +73,7 @@ const CampsiteIndex = () => {
                             <Link to={`/campsites/${campsite.id}`}>
                                 <div className='split'>
                                 
-                                <img className='campsite-prev-img' alt='' src={campsite.prev_image} />
+                                <img className='campsite-prev-img' alt='' src={campsite.prev_image} onError={(e) => { e.target.src = defaultimg; }} />
                                 
                                 <div className='top-index-campsite-title-rating'>
                                     <p className='top-index-campsite-title'>{campsite.title}</p>
@@ -100,7 +101,7 @@ const CampsiteIndex = () => {
 
                             <Link to={`/campsites/${campsite.id}`}>
                                 <div >
-                                    <img className='campsite-prev-img' alt='' src={campsite.prev_image} />
+                                    <img className='campsite-prev-img' alt='' src={campsite.prev_image} onError={(e) => { e.target.src = defaultimg; }} />
                                 </div>
                                 <div className='index-campsite-title-rating'>
                                     <p className='index-campsite-title'>{campsite.title}</p>

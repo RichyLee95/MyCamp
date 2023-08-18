@@ -25,12 +25,12 @@ gap: 5px;
   height:90px;
 }
 .nav-searchbar{
-padding-left: 40px;
+/* padding-left: 40px; */
 align-items: center;
 }
 .nav-searchbar input{
   height: 40px;
-  width: 200px;
+  width: 500px;
   border-radius: 10px;
 
   color: black;
@@ -38,6 +38,7 @@ align-items: center;
 .nav-searchbar button{
   height: 40px;
   border-radius: 10px;
+  
 }
 .nav{
   display: flex;
@@ -52,4 +53,14 @@ align-items: center;
   height:70px;
   max-width:100%;
 max-height:100%;
+}
+.profile-tree{
+height: 100%;
+width:100%;
+object-fit: cover;
+}
+.profile-btn{
+  width: 15;
+  height:38px;
+  border-radius: 10px;
 }

@@ -5,7 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom";
-
+import profiletree from '../../images/pine-tree-icon-10.jpg'
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -41,8 +41,8 @@ const history = useHistory()
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className="profile-btn" onClick={openMenu}>
+        <img className="profile-tree" src={profiletree} />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (

@@ -9,6 +9,6 @@ class CampsiteForm(FlaskForm):
   hours_open = TimeField("Hours Open", validators=[DataRequired()],format="%H:%M")
   hours_close = TimeField("Hours Closed",validators=[DataRequired()],format="%H:%M")
   phone_number = StringField("Phone Number", validators=[DataRequired()])
-  image = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
-  prev_image = FileField("Prev_Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+  image = FileField("Image File", validators=[ FileAllowed(list(ALLOWED_EXTENSIONS))])
+  prev_image = FileField("Prev_Image File", validators=[ FileAllowed(list(ALLOWED_EXTENSIONS))])
   submit = SubmitField("Submit")

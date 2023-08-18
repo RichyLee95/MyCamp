@@ -38,6 +38,7 @@ const SingleCampsite = () => {
         return starsArray
     }
     useEffect(() => {
+        
         dispatch(fetchSingleCampsite(campsiteId))
         dispatch(fetchAllReviews())
     }, [dispatch])
