@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { fetchSingleCampsite } from "../../store/campsite";
-
+import './DeleteReview.css'
 
 const DeleteReview = ({ review,campsiteId }) => {
     const {closeModal} = useModal()

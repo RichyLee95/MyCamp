@@ -29,3 +29,21 @@
     border-top:50px ;
     border-bottom: 50px;
 }
+.edit-btn-link button{
+    padding: 10px 20px;
+    background-color: #0073bb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.delete-campsite-btn button{
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}

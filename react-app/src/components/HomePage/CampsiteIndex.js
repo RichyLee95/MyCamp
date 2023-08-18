@@ -2,7 +2,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import { fetchAllCampsites } from '../../store/campsite';
-import Splashpic from '../../images/wildcamping.jpg'
+import Splashpic1 from '../../images/splashpic1.jpg'
+import Splashpic2 from '../../images/splashpic2.jpg'
+import Splashpic3 from '../../images/splashpic3.jpg'
 import defaultimg from '../../images/default-img.png'
 import './CampsiteIndex.css'
 import { fetchAllReviews } from '../../store/review';
@@ -14,7 +16,29 @@ const CampsiteIndex = () => {
     const allReviewsObj = useSelector(state => state.review.allReviews)
     const reviews = Object.values(allReviewsObj)
 
+    const carouselImages = [
+        Splashpic1,
+        Splashpic2,
+        Splashpic3
+      ];
 
+      const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+      const nextImage = () => {
+        const newIndex = (currentImageIndex + 1) % carouselImages.length;
+        setCurrentImageIndex(newIndex);
+      };
+      const prevImage = () => {
+        const newIndex = (currentImageIndex - 1 + carouselImages.length) % carouselImages.length;
+        setCurrentImageIndex(newIndex);
+      };
+
+      useEffect(() => {
+        const interval = setInterval(nextImage, 5000);
+        return () => {
+          clearInterval(interval);
+        };
+      }, [currentImageIndex]);
     const topRatedCampsite = []
     //itterate through each campsite
     allCampsites.forEach(campsite => {
@@ -54,12 +78,14 @@ const CampsiteIndex = () => {
         dispatch(fetchAllReviews())
     }, [dispatch])
     return (
+        <div className='campsite-index'>
+            <div className='index-img-container'>
+            <img className='index-img' src={carouselImages[currentImageIndex]} alt={`Image ${currentImageIndex + 1}`} />
+            </div>
         <div className='index-container'>
-        <div className='index-img-container'>
-        <img className='index-img' src={Splashpic} />
-                </div>
+            
             <div className='index-margin'>
-                
+
                 {/* <div className='top-rated-container'> */}
                 <div >
                     <p className='Adventure-text'>Adventure awaits</p>
@@ -72,25 +98,25 @@ const CampsiteIndex = () => {
 
                             <Link to={`/campsites/${campsite.id}`}>
                                 <div className='split'>
-                                
-                                <img className='campsite-prev-img' alt='' src={campsite.prev_image} onError={(e) => { e.target.src = defaultimg; }} />
-                                
-                                <div className='top-index-campsite-title-rating'>
-                                    <p className='top-index-campsite-title'>{campsite.title}</p>
-                                    {/* <p className='index-campsite-review'>{campsite.}</p> */}
-                                    {/* <p className='campsite rating'>{}</p>  */}
-                                    <div className='average-rating-stars campsite-index'>
-                                        {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
-                                        {campsite.reviews_count > 1 ? (<p className='review-count'>{campsite.reviews_count} reviews</p>):''}
-                                    {campsite.reviews_count === 1 ? (<p className='review-count'>{campsite.reviews_count} review</p>):''}
+
+                                    <img className='campsite-prev-img' alt='' src={campsite.prev_image} onError={(e) => { e.target.src = defaultimg; }} />
+
+                                    <div className='top-index-campsite-title-rating'>
+                                        <p className='top-index-campsite-title'>{campsite.title}</p>
+                                        {/* <p className='index-campsite-review'>{campsite.}</p> */}
+                                        {/* <p className='campsite rating'>{}</p>  */}
+                                        <div className='average-rating-stars campsite-index'>
+                                            {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
+                                            {campsite.reviews_count > 1 ? (<p className='review-count'>{campsite.reviews_count} reviews</p>) : ''}
+                                            {campsite.reviews_count === 1 ? (<p className='review-count'>{campsite.reviews_count} review</p>) : ''}
+                                        </div>
                                     </div>
                                 </div>
-</div>
                             </Link>
                         </div>
                     ))}
                 </div>
-                <hr className='top-all-break'/>
+                <hr className='top-all-break' />
                 {/* <div className='top-all-break'/> */}
                 {/* </div> */}
                 <div><h2>Discover your next adventure</h2></div>
@@ -109,8 +135,8 @@ const CampsiteIndex = () => {
                                     {/* <p className='campsite rating'>{}</p>  */}
                                     <div className='average-rating-stars campsite-index'>
                                         {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
-                                        {campsite.reviews_count > 1 ? (<p className='review-count'>{campsite.reviews_count} reviews</p>):''}
-                                    {campsite.reviews_count === 1 ? (<p className='review-count'>{campsite.reviews_count} review</p>):''}
+                                        {campsite.reviews_count > 1 ? (<p className='review-count'>{campsite.reviews_count} reviews</p>) : ''}
+                                        {campsite.reviews_count === 1 ? (<p className='review-count'>{campsite.reviews_count} review</p>) : ''}
                                     </div>
                                 </div>
 
@@ -120,7 +146,8 @@ const CampsiteIndex = () => {
 
                 </div>
             </div>
-            <About/>
+            <About />
+        </div>
         </div>
     )
 }

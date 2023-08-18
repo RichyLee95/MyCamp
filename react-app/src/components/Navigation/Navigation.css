@@ -9,7 +9,7 @@ position:absolute;
     width:10rem;
     height:12rem;
 font-weight: bold;
-cursor: pointer;
+/* cursor: pointer; */
 gap: 5px;
   /* padding-left: 7px; */
   /* margin-top: 34px; */
