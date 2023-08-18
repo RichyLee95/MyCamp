@@ -17,6 +17,7 @@ function SignupFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password.length < 8) setErrors(['Password Length must be 8 characters or more'])
     if (password === confirmPassword) {
         const data = await dispatch(signUp(username, email, password));
         if (data) {

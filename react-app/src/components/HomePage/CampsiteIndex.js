@@ -70,18 +70,21 @@ const CampsiteIndex = () => {
                         <div className='top-index-campsite'>
 
                             <Link to={`/campsites/${campsite.id}`}>
-                                {/* <div > */}
+                                <div className='split'>
+                                
                                 <img className='campsite-prev-img' alt='' src={campsite.prev_image} />
-                                {/* </div> */}
+                                
                                 <div className='top-index-campsite-title-rating'>
                                     <p className='top-index-campsite-title'>{campsite.title}</p>
                                     {/* <p className='index-campsite-review'>{campsite.}</p> */}
                                     {/* <p className='campsite rating'>{}</p>  */}
                                     <div className='average-rating-stars campsite-index'>
                                         {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
+                                        {campsite.reviews_count > 1 ? (<p className='review-count'>{campsite.reviews_count} reviews</p>):''}
+                                    {campsite.reviews_count === 1 ? (<p className='review-count'>{campsite.reviews_count} review</p>):''}
                                     </div>
                                 </div>
-
+</div>
                             </Link>
                         </div>
                     ))}
@@ -89,6 +92,7 @@ const CampsiteIndex = () => {
                 <hr className='top-all-break'/>
                 {/* <div className='top-all-break'/> */}
                 {/* </div> */}
+                <div><h2>Discover your next adventure</h2></div>
                 <div className='all-campsites-container'>
                     {allCampsites.map(campsite => (
 
@@ -104,6 +108,8 @@ const CampsiteIndex = () => {
                                     {/* <p className='campsite rating'>{}</p>  */}
                                     <div className='average-rating-stars campsite-index'>
                                         {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
+                                        {campsite.reviews_count > 1 ? (<p className='review-count'>{campsite.reviews_count} reviews</p>):''}
+                                    {campsite.reviews_count === 1 ? (<p className='review-count'>{campsite.reviews_count} review</p>):''}
                                     </div>
                                 </div>
 

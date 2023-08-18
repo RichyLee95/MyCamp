@@ -3,9 +3,9 @@ img{
 aspect-ratio: 3/2;
 max-height: 400px;
 }
-/* li {
+li {
     list-style: none;
-  } */
+  }
 
   a {
     text-decoration: none;
@@ -30,6 +30,14 @@ height: 20px;
     color:white;
     
   } */
-  errors{
-    color:red;
+  .errors {
+    color: #d9534f;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  h2{
+    font-family: Tahoma;
+  }
+  p{
+    font-family: Tahoma;
   }
