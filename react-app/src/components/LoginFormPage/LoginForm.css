@@ -37,3 +37,6 @@
 .log input{
     height: 30px;
 }
+.errors{
+    color: red;
+}
