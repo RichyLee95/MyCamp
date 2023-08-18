@@ -21,6 +21,25 @@ left:320px;
 
 
   }
+  .text-image .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
+
+  }
+  .text-image .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .text-image .fa-star-o{
+    background-color: orange;
+    color:white;
+    
+  }
   .review-title{
     color:white
   }
@@ -40,13 +59,9 @@ width:100%;
   .address-phone-container {
     /* margin-bottom: 20px; */
     display: flex;
-    flex-direction: column;
-    column-gap: 1rem;
-    border: 1px solid #ddd;
-    width:20rem;
-    height:15rem;
-    display: flex;
-    text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
   }
   
   .phonenumber, .address {
@@ -62,6 +77,7 @@ width:100%;
   .hours-text {
     font-size: 20px;
     margin-bottom: 10px;
+    color: #da3743;
   }
   
   .hours-open {
@@ -70,6 +86,7 @@ width:100%;
   
   .Reviews-container {
     margin-top: 20px;
+
   }
   
   .review {
@@ -94,6 +111,9 @@ width:100%;
   
   .review-text {
     margin: 10px 0;
+    width:400px;
+    word-wrap: break-word;
+    max-width: 400px;
   }
   
   .edit-delete-container {
@@ -108,6 +128,25 @@ width:100%;
     cursor: pointer;
   }
   
+   .review-delete button{
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+   }
+
+  .review-edit button{
+    padding: 10px 20px;
+    background-color: #0073bb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
   /* Button */
   .review-btn-container {
     margin-top: 20px;
@@ -125,4 +164,96 @@ width:100%;
   hr{
     border-bottom: 2px #ccc;
     width: 100%;
+  }
+  /* .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
+
+  }
+  .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .fa-star-o{
+    background-color: orange;
+    color:white;
+    
+  } */
+  .overall-rating .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
+
+  }
+  .overall-rating .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .overall-rating .fa-star-o{
+    background-color: orange;
+    color:white;
+    
+  }
+  .review-rating .fa-star{
+    background-color: orange;
+color:white;
+width:20px;
+height: 20px;
+align-items: center;
+
+  }
+  .review-rating .fa-star-half{
+    background-color: orange;
+    color:white;
+    width:20px;
+height: 20px;
+  }
+  .review-rating .fa-star-o{
+    background-color: orange;
+    color:white;
+    
+  }
+  .campsite-tips {
+    margin-top: 20px;
+  }
+  
+  .campsite-tips h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .campsite-tips .tent,
+  .campsite-tips .sleep,
+  .campsite-tips .sleep-pad,
+  .campsite-tips .light,
+  .campsite-tips .stove {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .campsite-tips img {
+    max-width: 100px;
+  }
+  
+  .campsite-tips p {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  .single-campsite {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
   }

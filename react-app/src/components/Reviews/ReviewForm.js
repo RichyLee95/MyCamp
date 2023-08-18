@@ -61,7 +61,7 @@ const ReviewForm = ({ review,campsiteId,reviewId, formType,disabled }) => {
                 <div className='greeting'>
                     <h2>How was your stay?</h2>
                 </div>
-                <input className='reviewinput'
+                <textarea className='reviewinput'
                     placeholder='Leave your review here...'
                     type='text'
                     value={review_text}

@@ -1,9 +1,15 @@
 .rating-input .filled {
-    color: saddlebrown;
+  color: white !important;
+background-color: orange;
+
   }
   
   .rating-input .empty {
-    color: burlywood;
+    color: white !important;
+    background-color: gray;
+  }
+  .rating-input .fa-star{
+    cursor: pointer;
   }
   .rating-input {
     display: flex;
@@ -12,4 +18,47 @@
 .review-text-block{
   font-weight: bold;
   padding: 8px;
+}
+.reviewform{
+   width: 450px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width:25rem;
+  justify-content: center;
+}
+.reviewinput{
+max-width:100%;
+  width: 350px;
+  height:150px;
+  display: flex;
+  align-items: center;
+  overflow-wrap: break-word;
+
+}
+.greeting{
+  margin:10px;
+  text-align: center;
+}
+.starreview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  justify-content: center;
+  margin-top: 20px;
+    margin-bottom: 20px;
+}
+.submit-btn{
+  background-color: #da3743;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+cursor: pointer;}
+.errors{
+  color: red;
 }

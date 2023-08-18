@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { thunkCreateCampsite, thunkEditCampsite } from '../../store/campsite';
+import { fetchCurrentCampsites, thunkCreateCampsite, thunkEditCampsite } from '../../store/campsite';
 import './CampsiteForm.css'
 
 const CampsiteForm = ({ campsite, formType }) => {
@@ -15,6 +15,8 @@ const CampsiteForm = ({ campsite, formType }) => {
     const [image, setImage] = useState(campsite?.image)
     const [prev_image, setPrev_image] = useState(campsite?.prev_image)
     const [validationErrors, setValidationErrors] = useState("")
+    const [imagePreview, setImagePreview] = useState(campsite?.image ? campsite.image : null);
+    const [prevImagePreview, setPrevImagePreview] = useState(campsite?.prev_image ? campsite.prev_image : null);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -46,12 +48,13 @@ const CampsiteForm = ({ campsite, formType }) => {
         setValidationErrors(errors)
         if (Object.keys(errors).length === 0) {
             if (formType === "Create Campsite") {
-                await dispatch(thunkCreateCampsite(formData))
-                console.log(formData)
-                history.push("/campsites/current")
+                const createdCampsite =   await dispatch(thunkCreateCampsite(formData))
+                const createdCampsiteId = createdCampsite.id
+                history.push(`/campsites/${createdCampsiteId}`)
             }
             else if (formType === "Edit Campsite") {
                 await dispatch(thunkEditCampsite(formData, campsite))
+                await dispatch(fetchCurrentCampsites(formData))
                 history.push("/campsites/current")
             }
         }
@@ -113,15 +116,21 @@ const CampsiteForm = ({ campsite, formType }) => {
                         maxLength="12"
                         onChange={(e) => setPhone_number(e.target.value)} />
                 </div>
+
+                
                 <div className='create-image-upload'>
                     <div>
                         {validationErrors.image ? (<p className="errors">{validationErrors.image}</p>) : ''}
                         <p>Input an image of your campsite</p>
                         <input
+                        id="image"
                             placeholder='Campsite image'
                             type='file'
                             accept='.png, .jpg, .jpeg,'
-                            onChange={(e) => setImage(e.target.files[0])} />
+                            onChange={(e) => {
+                                setImage(e.target.files[0])
+                                setImagePreview(URL.createObjectURL(e.target.files[0]))}} />
+                    {imagePreview && <img src={imagePreview} alt="Campsite" className="image-preview" />}
                     </div>
                     <div>
                         {validationErrors.prev_image ? (<p className="errors">{validationErrors.prev_image}</p>) : ''}
@@ -130,7 +139,9 @@ const CampsiteForm = ({ campsite, formType }) => {
                             placeholder='Preview image'
                             type='file'
                             accept='.png, .jpg, .jpeg,'
-                            onChange={(e) => setPrev_image(e.target.files[0])} />
+                            onChange={(e) => {setPrev_image(e.target.files[0])
+                                setPrevImagePreview(URL.createObjectURL(e.target.files[0]))}} />
+                    {prevImagePreview && <img src={prevImagePreview} alt="Preview" className="image-preview" />}
                     </div>
                 </div>
                 <div className='submit-btn'>

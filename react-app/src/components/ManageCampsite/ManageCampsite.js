@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentCampsites } from '../../store/campsite';
+import { fetchAllCampsites, fetchCurrentCampsites } from '../../store/campsite';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import DeleteCampsite from '../CreateCampsite/DeleteCampsite';
 import OpenModalButton from '../OpenModalButton';
@@ -14,6 +14,7 @@ const ManageCampsites = () => {
 
     useEffect(() => {
         dispatch(fetchCurrentCampsites())
+        dispatch(fetchAllCampsites())
     },[dispatch])
 
 
