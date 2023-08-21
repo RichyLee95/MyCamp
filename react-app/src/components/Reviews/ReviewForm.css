@@ -28,6 +28,7 @@ background-color: orange;
   padding: 20px;
   width:25rem;
   justify-content: center;
+  text-align: center;
 }
 .reviewinput{
 max-width:100%;

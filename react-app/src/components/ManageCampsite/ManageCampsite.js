@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom/cjs/react-router-dom';
 import DeleteCampsite from '../CreateCampsite/DeleteCampsite';
 import OpenModalButton from '../OpenModalButton';
 import './ManageCampsite.css'
-
+import About from '../Footer/Footer';
+import defaultimg from '../../images/default-img.png'
 const ManageCampsites = () => {
     const dispatch = useDispatch()
     const currentUser= useSelector(state => state.session.user)
@@ -26,7 +27,7 @@ return (
                 <div className='single-managed-campsite'>
                     <Link className='campsite-link' to={`/campsites/${campsite.id}`}>
                     <div >
-                    <img className='campsite-prev-img' alt='' src={campsite.prev_image} />
+                    <img className='campsite-prev-img' alt='' src={campsite.prev_image} onError={(e) => { e.target.src = defaultimg; }} />
                     </div>
                         <h2 className='campsite-title'>{campsite.title}</h2>
                     </Link>
@@ -50,7 +51,9 @@ return (
                 </div>
             ))}
         </div>
+        <About />
     </div>
+    
 )
 }
 

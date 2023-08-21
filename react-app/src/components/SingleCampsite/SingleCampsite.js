@@ -16,6 +16,8 @@ import stove from '../../icons/stove.png'
 import tent from '../../icons/tent.png'
 import map from '../../icons/map-icon.png'
 import phone from '../../icons/phone-icon.jpg'
+import About from '../Footer/Footer';
+import defaultimg from '../../images/default-img.png'
 const SingleCampsite = () => {
     const dispatch = useDispatch()
     const { campsiteId } = useParams()
@@ -53,7 +55,7 @@ const SingleCampsite = () => {
     return (
         <div className='single-campsite-container'>
             <div className='single-campsite-title'>
-                <img className='campsite-image' src={campsite.image} />
+                <img className='campsite-image' src={campsite.image} onError={(e) => { e.target.src = defaultimg; }} />
                 <div className='text-image'>
                 <h2 className='title'>{campsite.title}</h2>
                 
@@ -182,6 +184,7 @@ const SingleCampsite = () => {
                     ))}
                 </div>
             ) : (null)}
+            <About/>
         </div>
     )
 
