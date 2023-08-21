@@ -52,24 +52,27 @@ const history = useHistory()
             <li><Link className='user-campsite-link' to='/campsites/current'>Manage your Campsites</Link></li>
             <li><Link className='create-campsite' to='/campsites/new'>Create a new Campsite</Link></li>
             
-            <li>
+            <div className="logout-btn">
               <button onClick={handleLogout}>Log Out</button>
-            </li>
+            </div>
           </>
         ) : (
-          <>
+          <div className="profile-form">
+          <div className='profile-login'>
             <OpenModalButton
               buttonText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
-
+            </div>
+            <div className='profile-signup'>
             <OpenModalButton
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-          </>
+            </div>
+          </div>
         )}
       </ul>
     </>

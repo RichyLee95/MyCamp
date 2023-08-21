@@ -28,6 +28,7 @@ background-color: orange;
   padding: 20px;
   width:25rem;
   justify-content: center;
+  text-align: center;
 }
 .reviewinput{
 max-width:100%;
@@ -58,7 +59,14 @@ max-width:100%;
     border: none;
     border-radius: 5px;
     font-size: 18px;
-cursor: pointer;}
+cursor: pointer;
+justify-content: center;
+display: flex;
+}
 .errors{
   color: red;
+}
+.review-submit-btn{
+  display:flex;
+  justify-content: center;
 }

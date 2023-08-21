@@ -30,6 +30,7 @@ height: 20px;
     color:white;
     
   } */
+  body {margin:0;padding:0}
   .errors {
     color: #d9534f;
     font-size: 14px;
@@ -39,5 +40,8 @@ height: 20px;
     font-family: Tahoma;
   }
   p{
+    font-family: Tahoma;
+  }
+  label{
     font-family: Tahoma;
   }

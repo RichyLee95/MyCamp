@@ -114,7 +114,9 @@ const ReviewForm = ({ review,campsiteId,reviewId, formType,disabled }) => {
                         </div>
                     </div>
                 </div>
+                <div className='review-submit-btn'>
                 <button className='submit-btn' type='submit'>Submit Review</button>
+            </div>
             </form>
         </div>
     )
