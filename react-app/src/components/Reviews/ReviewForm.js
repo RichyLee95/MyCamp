@@ -12,7 +12,7 @@ const ReviewForm = ({ review,campsiteId,reviewId, formType,disabled }) => {
     const [review_text, setReview_text] = useState(review?.review_text)
     const [stars, setStars] = useState(review?.stars)
     const [activeRating, setActiveRating] = useState(stars);
-    const [validationErrors, setValidationErrors] = useState("")
+    const [validationErrors, setValidationErrors] = useState({})
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -113,6 +113,7 @@ const ReviewForm = ({ review,campsiteId,reviewId, formType,disabled }) => {
                             <i className="fa fa-star"></i>
                         </div>
                     </div>
+                    {validationErrors.stars && <p className="errors">{validationErrors.stars}</p>}
                 </div>
                 <div className='review-submit-btn'>
                 <button className='submit-btn' type='submit'>Submit Review</button>

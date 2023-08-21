@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { thunkDeleteCampsite } from '../../store/campsite';
-
+import './DeleteCampsite.css'
 const DeleteCampsite = ({campsite}) => {
     const { closeModal } = useModal()
     const dispatch = useDispatch()
@@ -11,8 +11,8 @@ const DeleteCampsite = ({campsite}) => {
         .then(closeModal)
     }
     return (
-        <div>
-            <div className="li-contents-flex">
+        // <div>
+        //     <div className="li-contents-flex">
         <div className='delete-campsite'>
           <h1 className='confirm-delete-campsite'>Confirm Delete</h1>
           <h3 className='delete-check-campsite'>Are you sure you want to delete this Campsite?</h3>
@@ -21,8 +21,8 @@ const DeleteCampsite = ({campsite}) => {
           <button className='btn-no' onClick={closeModal}>No (Keep Campsite)</button>
         </div>
         </div>
-      </div>
-        </div>
+      // </div>
+      //   </div>
     )
 }
 export default DeleteCampsite
