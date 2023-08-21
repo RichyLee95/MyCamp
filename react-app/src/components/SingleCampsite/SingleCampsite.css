@@ -60,8 +60,8 @@ width:100%;
     /* margin-bottom: 20px; */
     display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 20px;
+  flex-direction: column;
   }
   
   .phonenumber, .address {
@@ -140,7 +140,7 @@ width:100%;
 
   .review-edit button{
     padding: 10px 20px;
-    background-color: #0073bb;
+    background-color: forestgreen;
     color: white;
     border: none;
     border-radius: 5px;
@@ -256,4 +256,24 @@ height: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     max-width: 800px;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  .phone-icon{
+    height:25px;
+    width:30px;
+  }
+  .map-icon{
+    height:25px;
+    width:30px;
+  }
+  .phone-text{
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #da3743;
+  }
+  .address-text{
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #da3743;
   }

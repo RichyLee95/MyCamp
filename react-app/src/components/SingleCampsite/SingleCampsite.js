@@ -14,6 +14,8 @@ import pad from '../../icons/pad.png'
 import sleep from '../../icons/sleep.png'
 import stove from '../../icons/stove.png'
 import tent from '../../icons/tent.png'
+import map from '../../icons/map-icon.png'
+import phone from '../../icons/phone-icon.jpg'
 const SingleCampsite = () => {
     const dispatch = useDispatch()
     const { campsiteId } = useParams()
@@ -81,8 +83,10 @@ const SingleCampsite = () => {
             } */}
             <div className='single-campsite'>
             <div className='address-phone-container'>
-                <div className='phonenumber'>{campsite.phone_number}</div>
-                <div className='address'>{campsite.address}</div>
+                <h3 className='phone-text'>Phone Number</h3>
+                <div className='phonenumber'><img className='phone-icon' src={phone}/>{campsite.phone_number}</div>
+                <h3 className='address-text'>Address</h3>
+                <div className='address'><img className='map-icon' src={map}/>{campsite.address}</div>
             </div>
             <div className='hours-container'>
                 <h3 className='hours-text'>Hours</h3>

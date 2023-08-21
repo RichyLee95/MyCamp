@@ -36,7 +36,7 @@
 
 .log input{
     height: 30px;
-}
+} */
 .errors{
     color: red;
 }
@@ -44,34 +44,56 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height:200px;
     border-radius: 2;
     margin-top: 1rem;
+    justify-content: space-evenly;
+    text-align: center;
 }
 .outerform{
-    width:400px;
-    height: 400px;
     display: flex;
     width:25rem;
-    height:15rem;
+    height:25rem;
     align-items:start;
     justify-content: center;
 }
 .login-btn{
-    color: white;
-    margin-top: 16px;
-    display: flex;
-    flex-direction: column;
-    width:23rem;
-    height:2.5rem;
-    justify-content: center;
-    align-items: center;
-    background-color: red;
+    background-color: #da3743;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
   }
   .email{
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    width:100%;
+    display:flex;
+  }
+  .email-input{
     width:100%;
   }
   .password{
     width:100%;
-  } */
+    margin-bottom: 20px;
+  }
+  .demouser{
+    background-color: blue;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .login-demo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .login-btn-container {
+    margin-bottom: 10px;
+  }
+  .login-div{
+    padding:5px;
+  }

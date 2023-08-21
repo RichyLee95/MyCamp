@@ -24,7 +24,7 @@
   .form-container p {
     font-size: 16px;
     margin-bottom: 5px;
-    color: #555;
+    /* color: #555; */
   }
   
 
@@ -37,7 +37,7 @@
   }
   
 
-  .errors {
+ p .errors {
     color: #d9534f;
     font-size: 14px;
     margin-top: 5px;
@@ -78,7 +78,4 @@
     border-radius: 5px;
     margin-right: 10px;
     border: 1px solid #ccc;
-  }
-  .errors{
-    color: red;
   }

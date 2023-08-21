@@ -41,8 +41,14 @@ const CampsiteForm = ({ campsite, formType }) => {
         if (!hours_close) errors.hours_close = "Hours Closed is required"
         if (!phone_number) errors.phone_number = "Phone Number is required"
         if (!image) errors.image = "Campsite image is required"
+        else if (!['image/jpeg', 'image/png'].includes(image.type)) {
+            errors.image = 'Image must be in JPG or PNG format';
+        }
         // if (!image.type.includes("image")) errors.image = 'Image needs to end in png, jpg, jpeg'
         if (!prev_image) errors.prev_image = "Campsite preview image is required"
+        else if (!['image/jpeg', 'image/png'].includes(prev_image.type)) {
+            errors.prev_image = 'Preview Image must be in JPG or PNG format';
+        }
         // if (!prev_image.type.includes("image")) errors.prev_image = 'Preview image needs to end in png, jpg, jpeg'
 
         setValidationErrors(errors)

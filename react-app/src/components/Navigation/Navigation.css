@@ -63,4 +63,40 @@ object-fit: cover;
   width: 15;
   height:38px;
   border-radius: 10px;
+  cursor: pointer;
+}
+.profile-form{
+  margin-top: 1rem;
+display:flex;
+flex-direction: column;
+justify-content: space-evenly;
+column-gap: 5px;
+flex-direction: row-reverse;
+}
+.profile-login button{
+  background-color: forestgreen;
+  color: #fff;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.profile-signup button{
+  background-color: forestgreen;
+  color: #fff;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.logout-btn button{
+  background-color: forestgreen;
+  color: #fff;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
 }
