@@ -65,6 +65,7 @@ const CampsiteForm = ({ campsite, formType }) => {
         if (!hours_open) errors.hours_open = "Hours Open is required"
         if (!hours_close) errors.hours_close = "Hours Closed is required"
         if (!phone_number) errors.phone_number = "Phone Number is required"
+        if (!/^\d{3}-\d{3}-\d{4}$/.test(phone_number)) errors.phone_number = "Phone Number must be in the format 123-456-7899";
         if (!image) errors.image = "Campsite image is required"
         else if (formType === "Create Campsite" && !['image/jpeg', 'image/png'].includes(image.type)) {
             errors.image = 'Image must be in JPG or PNG format';
