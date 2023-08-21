@@ -18,6 +18,31 @@ const CampsiteForm = ({ campsite, formType }) => {
     const [imagePreview, setImagePreview] = useState(campsite?.image ? campsite.image : null);
     const [prevImagePreview, setPrevImagePreview] = useState(campsite?.prev_image ? campsite.prev_image : null);
 
+    const handleImageChange = (e, setImageFunction, imageType) => {
+        const selectedImage = e.target.files[0];
+
+        if (selectedImage) {
+            if (['image/jpeg', 'image/png'].includes(selectedImage.type)) {
+                setImageFunction(selectedImage);
+
+                if (imageType === 'image') {
+                    setImagePreview(URL.createObjectURL(selectedImage));
+                } else if (imageType === 'prev_image') {
+                    setPrevImagePreview(URL.createObjectURL(selectedImage));
+                }
+            } else {
+                setImageFunction(null);
+            }
+        } else {
+            setImageFunction(null);
+
+            if (imageType === 'image') {
+                setImagePreview(null);
+            } else if (imageType === 'prev_image') {
+                setPrevImagePreview(null);
+            }
+        }
+    };
     const handleSubmit = async (e) => {
         e.preventDefault()
         let errors = {}
@@ -41,12 +66,12 @@ const CampsiteForm = ({ campsite, formType }) => {
         if (!hours_close) errors.hours_close = "Hours Closed is required"
         if (!phone_number) errors.phone_number = "Phone Number is required"
         if (!image) errors.image = "Campsite image is required"
-        else if (!['image/jpeg', 'image/png'].includes(image.type)) {
+        else if (formType === "Create Campsite" && !['image/jpeg', 'image/png'].includes(image.type)) {
             errors.image = 'Image must be in JPG or PNG format';
         }
         // if (!image.type.includes("image")) errors.image = 'Image needs to end in png, jpg, jpeg'
         if (!prev_image) errors.prev_image = "Campsite preview image is required"
-        else if (!['image/jpeg', 'image/png'].includes(prev_image.type)) {
+        else if (formType === "Create Campsite" && !['image/jpeg', 'image/png'].includes(prev_image.type)) {
             errors.prev_image = 'Preview Image must be in JPG or PNG format';
         }
         // if (!prev_image.type.includes("image")) errors.prev_image = 'Preview image needs to end in png, jpg, jpeg'
@@ -133,9 +158,7 @@ const CampsiteForm = ({ campsite, formType }) => {
                             placeholder='Campsite image'
                             type='file'
                             accept='.png, .jpg, .jpeg,'
-                            onChange={(e) => {
-                                setImage(e.target.files[0])
-                                setImagePreview(URL.createObjectURL(e.target.files[0]))}} />
+                            onChange={(e) => handleImageChange(e, setImage, 'image')} />
                     {imagePreview && <img src={imagePreview} alt="Campsite" className="image-preview" />}
                     </div>
                     <div>
@@ -145,8 +168,7 @@ const CampsiteForm = ({ campsite, formType }) => {
                             placeholder='Preview image'
                             type='file'
                             accept='.png, .jpg, .jpeg,'
-                            onChange={(e) => {setPrev_image(e.target.files[0])
-                                setPrevImagePreview(URL.createObjectURL(e.target.files[0]))}} />
+                            onChange={(e) => handleImageChange(e, setPrev_image, 'prev_image')} />
                     {prevImagePreview && <img src={prevImagePreview} alt="Preview" className="image-preview" />}
                     </div>
                 </div>
