@@ -48,7 +48,7 @@
     box-sizing: border-box;
     width:200px;
     flex-direction: row;
-    border-radius: 4px;
+    border-radius: 15px;
     cursor: pointer;
     height: 100%;
     min-height: 200px;
@@ -67,6 +67,7 @@
     box-sizing: border-box;
     width:200px;
     text-decoration: none;
+    border-radius: 15px;
 }
 .campsite-prev-img{
     width: 100%;

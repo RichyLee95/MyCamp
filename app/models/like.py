@@ -22,6 +22,6 @@ class Like(db.Model):
         return {
             "id":self.id,
             "user_id":self.user_id,
-            "review_id":self.post_id,
+            "review_id":self.review_id,
             "username": self.users.username
         }
