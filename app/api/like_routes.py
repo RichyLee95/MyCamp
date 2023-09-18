@@ -60,6 +60,7 @@ def remove_like(likeid):
     '''
     like_delete = Like.query.get(likeid)
 
+
     if like_delete.users.id != current_user.id:
         return jsonify({'error': 'You are not authorized to unlike'}), 401
 
