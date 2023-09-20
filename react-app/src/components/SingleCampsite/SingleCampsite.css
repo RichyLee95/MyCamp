@@ -277,3 +277,7 @@ height: 20px;
     margin-bottom: 10px;
     color: #da3743;
   }
+  .like-button-container{
+    width:15px;
+    cursor: pointer;
+  }
