@@ -19,6 +19,7 @@ import phone from '../../icons/phone-icon.jpg'
 import About from '../Footer/Footer';
 import defaultimg from '../../images/default-img.png'
 import Like from '../Likes/index'
+import CampsiteLike from '../CampsiteLikes/CampsiteLike';
 const SingleCampsite = () => {
     const dispatch = useDispatch()
     const { campsiteId } = useParams()
@@ -70,7 +71,12 @@ const SingleCampsite = () => {
                         (<h3 className='review-title'>({campsite.reviews_count} reviews)</h3>)
                         : ''}
 
-
+                        <div className='campsite-like'>
+                        <CampsiteLike campsite={campsite} />
+                                    
+                                <div>{campsite.campsitelikes_count} People liked this
+                                </div>
+                        </div>
 
 
                 </div>

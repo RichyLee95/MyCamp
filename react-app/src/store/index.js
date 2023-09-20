@@ -4,11 +4,13 @@ import session from './session'
 import campsitesReducer from './campsite';
 import reviewsReducer from './review';
 import likesReducer from './like';
+import campsiteLikesReducer from './campsitelike';
 const rootReducer = combineReducers({
   session,
   campsites:campsitesReducer,
   review:reviewsReducer,
-  likes:likesReducer
+  likes:likesReducer,
+  campsitelikes:campsiteLikesReducer
 });
 
 
