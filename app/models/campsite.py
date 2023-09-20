@@ -19,6 +19,7 @@ class Campsite(db.Model):
     users = db.relationship("User", back_populates="campsites")
     attractions= db.relationship("Attraction", back_populates="campsites", cascade="all, delete")
     reviews = db.relationship("Review", back_populates="campsites",cascade="all, delete")
+    campsitelikes = db.relationship("CampsiteLike", back_populates="campsites",cascade="all, delete")
 
     def to_dict(self):
         return {
@@ -33,7 +34,9 @@ class Campsite(db.Model):
             "prev_image":self.prev_image,
             "reviews":[review.to_dict() for review in self.reviews],
             "attractions":[attraction.to_dict() for attraction in self.attractions],
-            "reviews_count": len(self.reviews)
+            "reviews_count": len(self.reviews),
+            "campsitelikes":[campsitelike.to_dict() for campsitelike in self.campsitelikes],
+            "campsitelikes_count": len(self.campsitelikes)
         }
     def to_dict_no_user(self):
         return {
