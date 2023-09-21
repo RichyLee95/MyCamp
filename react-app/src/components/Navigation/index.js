@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import logo from '../../images/mycamp-logo.jpg'
+import { fetchSearchCampsites } from '../../store/campsite';
+import { useHistory } from 'react-router-dom';
 function Navigation({ isLoaded }) {
+	const history= useHistory()
+	const dispatch= useDispatch()
 	const sessionUser = useSelector(state => state.session.user);
 	const [searchInput, setSearchInput] = useState('');
-	const handleReserve = () => {
-		alert('Feature coming soon')
-	}
+
+	const handleSearchClick = async (e) => {
+		e.preventDefault();
+		dispatch(fetchSearchCampsites(searchInput)).then(history.push("/search"))
+	};
 
 	const handleSearch = (e) => {
 		setSearchInput(e.target.value)
@@ -22,7 +28,7 @@ function Navigation({ isLoaded }) {
 					<img className="logo" src={logo} alt="Home" />
 				</NavLink>
 		</div>
-				<form className='nav-searchbar' onSubmit={handleReserve}>
+				<form className='nav-searchbar' onSubmit={handleSearchClick}>
 					<input
 						type="text"
 						value={searchInput}

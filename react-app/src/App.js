@@ -10,6 +10,7 @@ import SingleCampsite from "./components/SingleCampsite/SingleCampsite";
 import ManageCampsites from "./components/ManageCampsite/ManageCampsite";
 import CreateCampsite from "./components/CreateCampsite/CreateCampsite";
 import EditCampsite from "./components/CreateCampsite/EditCampsite";
+import Search from "./components/Search/search";
 // import CreateReview from "./components/Reviews/CreateReview";
 // import ReviewForm from "./components/Reviews/ReviewForm";
 function App() {
@@ -34,7 +35,7 @@ function App() {
           <Route exact path='/campsites/current' component={ManageCampsites}/>
           <Route exact path='/campsites/new' component={CreateCampsite}/>
           <Route exact path="/campsites/:campsiteId" component={SingleCampsite}/>
-          
+          <Route exact path="/search" component={Search}/>
           <Route exact path='/campsites/:campsiteId/edit' component={EditCampsite}/>
           
           
