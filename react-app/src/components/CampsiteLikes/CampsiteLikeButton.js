@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 const CampsiteLikeButton = ({ isLiked, onLike }) => {
     const [liked, setLiked] = useState(isLiked);
     const [iconColor, setIconColor] = useState(isLiked ? "red" : "black");
-
+    // const iconColor = isLiked ? "red" : "black";
     // Update the "liked" state and icon color whenever the "isLiked" prop changes
     useEffect(() => {
         setLiked(isLiked);

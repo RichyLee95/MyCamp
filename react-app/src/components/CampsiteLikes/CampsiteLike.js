@@ -13,7 +13,7 @@ const CampsiteLike = ({ campsite }) => {
     const campsitelike = userCampsiteLikes.find((campsitelike) => campsitelike.campsite_id === campsite.id);
   const campsitelikeId = campsitelike ? campsitelike.id : null;
   const userLiked = () => {
-    return userCampsiteLikes.find((campsitelike) => campsitelike.campsite_id === campsite.id);
+    return userCampsiteLikes.some((campsitelike) => campsitelike.campsite_id === campsite.id);
 };
 const handleLikeClick = async () => {
     if (campsitelikeId) {
