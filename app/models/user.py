@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     campsites = db.relationship("Campsite", back_populates="users")
     reviews = db.relationship("Review", back_populates="users")
     likes = db.relationship("Like", back_populates="users")
+    campsitelikes = db.relationship("CampsiteLike", back_populates="users")
 
     @property
     def password(self):
