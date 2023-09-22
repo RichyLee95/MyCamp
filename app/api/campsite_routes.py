@@ -32,6 +32,24 @@ def get_campsite_by_id(id):
   single_campsite = Campsite.query.get(id)
   return {"campsite": single_campsite.to_dict()}
 
+@campsite_routes.route("/search")
+def search_campsites():
+  '''
+  search all campsites
+  '''
+  # get the parameters from the routes
+  keyword = request.args.get('keyword'); 
+  print(keyword)
+  if not keyword:    
+        return "Please provide a keyword for search."
+
+  search_campsites = Campsite.query.filter(
+        (Campsite.title.like(f"%{keyword}%"))
+    ).all()
+  response_campsites = [campsite.to_dict() for campsite in search_campsites]
+  print(response_campsites)
+  return {"campsites": response_campsites }
+
 # create a new campsite
 @campsite_routes.route("/new", methods=["POST"])
 @login_required

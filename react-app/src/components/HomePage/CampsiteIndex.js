@@ -80,7 +80,9 @@ const CampsiteIndex = () => {
     return (
         <div className='campsite-index'>
             <div className='index-img-container'>
+                <div className='index-img-center'>
             <img className='index-img' src={carouselImages[currentImageIndex]} alt={`Image ${currentImageIndex + 1}`} />
+            </div>
             </div>
         <div className='index-container'>
             
@@ -105,7 +107,7 @@ const CampsiteIndex = () => {
                                         <p className='top-index-campsite-title'>{campsite.title}</p>
                                         {/* <p className='index-campsite-review'>{campsite.}</p> */}
                                         {/* <p className='campsite rating'>{}</p>  */}
-                                        <div className='average-rating-stars campsite-index'>
+                                        <div className='average-rating-stars'>
                                             {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
                                             {campsite.reviews_count > 1 ? (<p className='review-count'>{campsite.reviews_count} reviews</p>) : ''}
                                             {campsite.reviews_count === 1 ? (<p className='review-count'>{campsite.reviews_count} review</p>) : ''}
@@ -133,7 +135,7 @@ const CampsiteIndex = () => {
                                     <p className='index-campsite-title'>{campsite.title}</p>
                                     {/* <p className='index-campsite-review'>{campsite.}</p> */}
                                     {/* <p className='campsite rating'>{}</p>  */}
-                                    <div className='average-rating-stars campsite-index'>
+                                    <div className='average-rating-stars'>
                                         {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
                                         {campsite.reviews_count > 1 ? (<p className='review-count'>{campsite.reviews_count} reviews</p>) : ''}
                                         {campsite.reviews_count === 1 ? (<p className='review-count'>{campsite.reviews_count} review</p>) : ''}

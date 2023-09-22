@@ -15,10 +15,26 @@
     font-weight: 900;
 }
 .index-img-container{
-    width:100%;
+    width:1024px;
+    display:flex;
+    flex-direction: column;
+}
+.campsite-index{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
 }
 .index-img{
     width:100%;
+    display: flex;
+    justify-content: center;
+    object-fit: cover;
+}
+.index-img-center{
+    display:flex;
+    width:100%;
+    justify-content: center;
 }
 .top-rated-container{
     border: 3px solid #ccc;
@@ -38,7 +54,8 @@
      display: flex; 
      flex-wrap: wrap; 
      gap: 20px; 
-     margin-top: 20px; 
+     margin-top: 20px;
+     justify-content: center; 
      /* flex-direction: column;  */
  }  
 .top-index-campsite{
@@ -75,7 +92,7 @@
     object-fit: cover;
     border-radius: 4px;
 }
-.avgerage-rating-stars .fa-star{
+.average-rating-stars .fa-star{
     background-color: orange;
 color:white;
 width:20px;
@@ -83,13 +100,13 @@ height: 20px;
 align-items: center;
 
   }
-  .avgerage-rating-stars .fa-star-half{
+  .average-rating-stars .fa-star-half{
     background-color: orange;
     color:white;
     width:20px;
 height: 20px;
   }
-  .avgerage-rating-stars .fa-star-o{
+  .average-rating-stars .fa-star-o{
     background-color: orange;
     color:white;
     
