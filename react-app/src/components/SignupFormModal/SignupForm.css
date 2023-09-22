@@ -11,6 +11,9 @@
 }
 .signup-form{
     margin:25px;
+    display:flex;
+    flex-direction: column;
+    gap:15px;
 }
 .signup-email{
     width:20rem;

@@ -23,6 +23,10 @@ return (
     <div className='manage-campsite-container'>
         <div className='manage-title'><h2 >{currentUser.username}'s Campsites</h2></div>
         <div className='manage-campsite'>
+            <div className='no-campsites'>
+                {currentUserCampsite.length <= 1 ?<h2>You have no campsites </h2>: ('')}
+                {currentUserCampsite.length <= 1 ? <Link className='create-campsite' to='/campsites/new'><button className='create-campsite'>Create a new Campsite</button></Link>: ""}
+            </div>
             {currentUserCampsite.map(campsite => (
                 <div className='single-managed-campsite'>
                     <Link className='campsite-link' to={`/campsites/${campsite.id}`}>

@@ -49,3 +49,8 @@
 .single-managed-campsite{
     max-width: 300px;
 }
+.no-campsites{
+    text-align: center;
+    border-top:50px ;
+    border-bottom: 50px;
+}

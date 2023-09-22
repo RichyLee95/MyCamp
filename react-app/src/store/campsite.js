@@ -5,7 +5,7 @@ const GET_CAMPSITE = "campsites/GET_CAMPSITE";
 const ADD_CAMPSITE = "campsites/ADD_CAMPSITE";
 const REMOVE_CAMPSITE = "campsites/REMOVE_CAMPSITE";
 const UPDATE_CAMPSITE = "campsites/UPDATE_CAMPSITE";
-
+const GET_SEARCH_CAMPSITES = "campsites/GET_SEARCH_CAMPSITES";
 // Action Creators
 const getAllCampsitesAction = (campsites) => ({
     type: GET_ALL_CAMPSITES,
@@ -19,6 +19,11 @@ const getCampsiteAction = (campsite) => ({
 
 const getCurrentCampsitesAction = (campsites) => ({
     type: GET_CURRENT_CAMPSITES,
+    campsites,
+});
+
+const getSearchCampsites = (campsites) => ({
+    type: GET_SEARCH_CAMPSITES,
     campsites,
 });
 
@@ -60,6 +65,14 @@ export const fetchSingleCampsite = (campsiteId) => async (dispatch) => {
         const { campsite } = await response.json();
         dispatch(getCampsiteAction(campsite));
         return campsite;
+    }
+};
+
+export const fetchSearchCampsites = (keyword) => async (dispatch) => {
+    const response = await fetch(`/api/campsites/search?keyword=${keyword}`);
+    if (response.ok) {
+        const { campsites } = await response.json();
+        await dispatch(getSearchCampsites(campsites));
     }
 };
 
@@ -109,72 +122,79 @@ const initialState = {
     allCampsites: {},
     currentCampsites: {},
     singleCampsite: {},
+    searchCampsites: {},
 };
 
 
-  //Reducer
-  export default function campsitesReducer(state = initialState, action) {
+//Reducer
+export default function campsitesReducer(state = initialState, action) {
     switch (action.type) {
-      case GET_ALL_CAMPSITES:{
-        let campsiteState = { 
-            ...state,
-             allCampsites: {}
-             };
-        action.campsites.forEach((campsite) => {
-          campsiteState.allCampsites[campsite.id] = campsite;
-        });
-        return campsiteState;
-        }
-        case GET_CAMPSITE:{
-            return {
-              ...state,
-              singleCampsite:action.campsite
-              
+        case GET_ALL_CAMPSITES: {
+            let campsiteState = {
+                ...state,
+                allCampsites: {}
             };
-            }
-          case GET_CURRENT_CAMPSITES:{
+            action.campsites.forEach((campsite) => {
+                campsiteState.allCampsites[campsite.id] = campsite;
+            });
+            return campsiteState;
+        }
+        case GET_CAMPSITE: {
+            return {
+                ...state,
+                singleCampsite: action.campsite
+
+            };
+        }
+        case GET_CURRENT_CAMPSITES: {
             let currentCampsitesState = {
                 ...state,
-                 currentCampsites: {}
-                 };
+                currentCampsites: {}
+            };
             action.campsites.forEach((campsite) => {
-              currentCampsitesState.currentCampsites[campsite.id] = campsite;
+                currentCampsitesState.currentCampsites[campsite.id] = campsite;
             });
             return currentCampsitesState
-            }
-            case ADD_CAMPSITE:{
-            return{
+        }
+        case GET_SEARCH_CAMPSITES:
+            let searchCampsitesState = { ...state, searchCampsites: {} };
+            action.campsites.forEach((campsite) => {
+                searchCampsitesState.searchCampsites[campsite.id] = campsite;
+            });
+            return searchCampsitesState
+        case ADD_CAMPSITE: {
+            return {
                 ...state,
-                allCampsite:{
+                allCampsite: {
                     ...state.allCampsites,
-                    [action.campsite.id]:action.campsite,
+                    [action.campsite.id]: action.campsite,
                 },
             }
+        }
+        case UPDATE_CAMPSITE: {
+            return {
+                ...state,
+                allCampsites: {
+                    ...state.allCampsites,
+                    [action.campsite.id]: action.campsite
+                },
             }
-            case UPDATE_CAMPSITE:{
-                return {
-                    ...state,
-                    allCampsites:{
-                        ...state.allCampsites,
-                        [action.campsite.id]:action.campsite
-                    },
-                    }
-                    }
-            case REMOVE_CAMPSITE:{
-                const campsiteToDelete = {
-                    ...state,
-                    currentCampsites:{...state.currentCampsites},
-                    allCampsites:{
-                        ...state.allCampsites
-                    }
+        }
+        case REMOVE_CAMPSITE: {
+            const campsiteToDelete = {
+                ...state,
+                currentCampsites: { ...state.currentCampsites },
+                allCampsites: {
+                    ...state.allCampsites
                 }
-                delete campsiteToDelete.allCampsites[action.campsiteId]
-                delete campsiteToDelete.currentCampsites[action.campsiteId]
-                return campsiteToDelete
             }
-      default:
-        return state;
+            delete campsiteToDelete.allCampsites[action.campsiteId]
+            delete campsiteToDelete.currentCampsites[action.campsiteId]
+            return campsiteToDelete
+        }
+        default:
+            return state;
     }
-  }
-  
+}
+
 
