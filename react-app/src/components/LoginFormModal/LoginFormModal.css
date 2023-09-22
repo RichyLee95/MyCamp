@@ -47,15 +47,17 @@
     border-radius: 2;
     margin-top: 1rem;
     justify-content: space-evenly;
-    text-align: center;
+    /* text-align: center; */
+    padding:15px;
+    width: 250px;
 }
-.outerform{
+/* .outerform{
     display: flex;
     width:25rem;
     height:25rem;
     align-items:start;
     justify-content: center;
-}
+} */
 .login-btn{
     background-color: #da3743;
     color: #fff;
@@ -69,6 +71,8 @@
     margin-bottom: 10px;
     width:100%;
     display:flex;
+    justify-content: left;
+    flex-direction: column;
   }
   .email-input{
     width:100%;
@@ -76,6 +80,12 @@
   .password{
     width:100%;
     margin-bottom: 20px;
+    display:flex;
+    justify-content: left;
+    flex-direction: column;
+  }
+  .password > input{
+    width:100%;
   }
   .demouser{
     background-color: blue;

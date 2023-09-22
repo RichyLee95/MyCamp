@@ -1,0 +1,9 @@
+.search-container .average-rating-stars .fa-star,
+.search-container .average-rating-stars .fa-star-half,
+.search-container .average-rating-stars .fa-star-o {
+  background-color: orange;
+  color: white;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+}

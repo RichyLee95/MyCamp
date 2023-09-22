@@ -39,10 +39,13 @@ const Search = () => {
         
     }, [dispatch]);
     return(
+        <div className='index-container'>
+          <h2>Search Results</h2>  
     <div className='all-campsites-container'>
-        {allCampsites?.length === 0 && <h3 className='no_search_result'>No result found! Please try something else...</h3>}
+        
+        {allCampsites?.length === 0 && <h3 className='no_search_result'>No search results found please try another search!</h3>}
                     {allCampsites.map(campsite => (
-
+                        <div className='search-container'>
                         <div className='index-campsite'>
 
                             <Link to={`/campsites/${campsite.id}`}>
@@ -53,7 +56,7 @@ const Search = () => {
                                     <p className='index-campsite-title'>{campsite.title}</p>
                                     {/* <p className='index-campsite-review'>{campsite.}</p> */}
                                     {/* <p className='campsite rating'>{}</p>  */}
-                                    <div className='average-rating-stars campsite-index'>
+                                    <div className='average-rating-stars'>
                                         {avgStars(reviews.filter(review => review.campsite_id === campsite.id))}
                                         {campsite.reviews_count > 1 ? (<p className='review-count'>{campsite.reviews_count} reviews</p>) : ''}
                                         {campsite.reviews_count === 1 ? (<p className='review-count'>{campsite.reviews_count} review</p>) : ''}
@@ -62,8 +65,10 @@ const Search = () => {
 
                             </Link>
                         </div>
+                        </div>
                     ))}
 
+                </div>
                 </div>
              )   
 }

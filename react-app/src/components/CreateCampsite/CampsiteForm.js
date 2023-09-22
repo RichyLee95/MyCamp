@@ -17,7 +17,11 @@ const CampsiteForm = ({ campsite, formType }) => {
     const [validationErrors, setValidationErrors] = useState("")
     const [imagePreview, setImagePreview] = useState(campsite?.image ? campsite.image : null);
     const [prevImagePreview, setPrevImagePreview] = useState(campsite?.prev_image ? campsite.prev_image : null);
-
+    const parseTime = (string) =>{
+        let hours = parseInt(string.slice(0,2))
+        let minutes = parseInt(string.slice(string.length - 2, string.length - 1))
+        return hours * 60 + minutes
+    }
     const handleImageChange = (e, setImageFunction, imageType) => {
         const selectedImage = e.target.files[0];
 
@@ -64,6 +68,7 @@ const CampsiteForm = ({ campsite, formType }) => {
         if (address.trim().length === 0) errors.address = 'Address input cannot be whitespace'
         if (!hours_open) errors.hours_open = "Hours Open is required"
         if (!hours_close) errors.hours_close = "Hours Closed is required"
+        if(parseTime(hours_close) - parseTime(hours_open) <= 0) errors.hours_open = "Hours open cannot be before closing time"
         if (!phone_number) errors.phone_number = "Phone Number is required"
         if (!/^\d{3}-\d{3}-\d{4}$/.test(phone_number)) errors.phone_number = "Phone Number must be in the format 123-456-7899";
         if (!image) errors.image = "Campsite image is required"
@@ -173,6 +178,7 @@ const CampsiteForm = ({ campsite, formType }) => {
                     {prevImagePreview && <img src={prevImagePreview} alt="Preview" className="image-preview" />}
                     </div>
                 </div>
+                <div style={{color: 'red'}}>All Fields Required </div>
                 <div className='submit-btn'>
                     <button className='button' type='submit'>Submit</button>
                 </div>
