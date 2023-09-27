@@ -57,7 +57,6 @@ def is_liked(campsite_id):
     '''Check if the campsite is liked by the current user'''
     is_liked = CampsiteLike.query.filter_by(user_id=current_user.id, campsite_id=campsite_id).first()
     # is_liked_response = [campsitelike.to.dict() for campsitelike in is_liked]
-    print('ERRORRR BIG DICKUS',is_liked)
     return jsonify({"is_liked": bool(is_liked)})
     
 @campsitelike_routes.route('/<int:campsite_id>',methods=['DELETE'])

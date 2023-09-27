@@ -23,6 +23,7 @@ import CampsiteLike from '../CampsiteLikes/CampsiteLike';
 import LoadingScreen from '../Loading/Loading';
 // import { checkIsLiked } from '../../store/campsitelike';
 import { checkIsLiked, fetchCampsiteLikes, fetchUserCampsiteLikes, thunkAddCampsiteLike, thunkRemoveLike } from '../../store/campsitelike';
+import { checkReviewIsLiked, fetchReviewLikes, fetchUserLikes } from '../../store/like';
 const SingleCampsite = () => {
     const dispatch = useDispatch()
     const { campsiteId } = useParams()
@@ -40,8 +41,21 @@ const SingleCampsite = () => {
     const campsitelikeId = campsitelike ? campsitelike.id : null;
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isReviewLiked, setIsReviewLiked] = useState('');
+    const userLikedReview = useSelector((state)=> state.likes.userLikes || [] )
+    const campsiteReviewLikes = useSelector((state)=> state.campsites.singleCampsite.reviews || [])
+    // const userReviewlike = campsite.find((reviewId) => campsite.reviews === campsite.id);
+    // const campsitevalues = Object.values(campsite)
+    // const userlikesvalues = Object.values(userLikedReview)
+    // console.log('userlikedvalues',userlikesvalues)
+    // console.log('campsitereviews',campsiteReviewLikes)
+    // const campsitereviewsVALUES= Object.values(campsiteReviewLikes)
+    // console.log('campsitereviewLIKES',(campsitereviewsVALUES))
 
-    const avgStars = (campsiteReviews) => {
+    const campsiteReviewIds = campsiteReviewLikes.map(review => review.id);
+const likesReviewIds = userLikedReview.map(like => like.review_id);
+const commonReviewId = campsiteReviewIds.find(reviewId => likesReviewIds.includes(reviewId));
+const avgStars = (campsiteReviews) => {
         const totalStars = campsiteReviews?.reduce((sum, review) => sum + review.stars, 0)
         const avgRating = totalStars / campsiteReviews?.length
 
@@ -78,17 +92,23 @@ const SingleCampsite = () => {
         }
     };
     useEffect(() => {
-        
-        
+
+
         const fetchData = async () => {
             try {
                 // dispatch(checkIsLiked())
-                if (loggedInUserId) { await dispatch(fetchUserCampsiteLikes(loggedInUserId))}
-               await dispatch(fetchCampsiteLikes(campsiteId))
-               await dispatch(fetchSingleCampsite(campsiteId))
-               await dispatch(fetchAllReviews())
+                // console.log('likes',userlikesvalues)
+                if (loggedInUserId) { await dispatch(fetchUserCampsiteLikes(loggedInUserId)) }
+                await dispatch(fetchCampsiteLikes(campsiteId))
+                await dispatch(fetchSingleCampsite(campsiteId))
+                await dispatch(fetchUserLikes(loggedInUserId))
+                await dispatch(fetchAllReviews())
+                // await dispatch(fetchReviewLikes(campsiteReviews.id))
+                
+                // const isReviewLikedChecked = await dispatch(checkReviewIsLiked(review.id));
                 const isLikedChecked = await dispatch(checkIsLiked(campsite.id));
                 // console.log("Favorited status from action:", favorited);
+                // setIsReviewLiked(isReviewLikedChecked)
                 setIsLiked(isLikedChecked);
             } catch (error) {
                 console.error("Failed to fetch campsitelike status:", error);
@@ -97,49 +117,51 @@ const SingleCampsite = () => {
         }
         setTimeout(() => {
             setIsLoading(false); // Set isLoading to false when data is loaded
-         
-        }, 2000);
-        fetchData() 
-    }, [dispatch,loggedInUserId,campsiteId,campsite.id])
 
+        }, 2000);
+        fetchData()
+    }, [dispatch, loggedInUserId, campsiteId, campsite.id])
+// console.log('likesreivew',likereview)
     return (
         <div className='single-campsite-container'>
             {isLoading ? (
-        <LoadingScreen /> // Render the loading screen while isLoading is true
-      ) : (
-        // Render the campsite content when isLoading is false
-        <div>
-            <div className='single-campsite-title'>
-                <img className='campsite-image' src={campsite.image} onError={(e) => { e.target.src = defaultimg; }} />
-                <div className='text-image'>
-                    <h2 className='title'>{campsite.title}</h2>
+                <LoadingScreen /> // Render the loading screen while isLoading is true
+            ) : (
+                // Render the campsite content when isLoading is false
+                <div>
+                    <div className='single-campsite-title'>
+                        <img className='campsite-image' src={campsite.image} onError={(e) => { e.target.src = defaultimg; }} />
+                        <div className='text-image'>
+                            <h2 className='title'>{campsite.title}</h2>
 
-                    {campsiteReviews.length > 0 ? (
-                        avgStars(campsite.reviews)) : (<p>No Reviews, be the first to write one!</p>)}
+                            {campsiteReviews.length > 0 ? (
+                                avgStars(campsite.reviews)) : (<p>No Reviews, be the first to write one!</p>)}
 
-                    {campsite.reviews_count === 1 ?
-                        (<h3 className='review-title'>({campsite.reviews_count} review)</h3>)
-                        : ''}
-                    {campsite.reviews_count > 1 ?
-                        (<h3 className='review-title'>({campsite.reviews_count} reviews)</h3>)
-                        : ''}
+                            {campsite.reviews_count === 1 ?
+                                (<h3 className='review-title'>({campsite.reviews_count} review)</h3>)
+                                : ''}
+                            {campsite.reviews_count > 1 ?
+                                (<h3 className='review-title'>({campsite.reviews_count} reviews)</h3>)
+                                : ''}
 
-                    <div className='campsite-like'>
+                            <div className='campsite-like'>
+                            <div>
+    {loggedInUserId && (
+                                <div className='campsitelike-icon'>
+                                    <i className={`fa fa-heart ${isLiked ? "active" : ""}`}
+                                        onClick={handleLikeClick}>
+                                    </i>
+                                </div>
+                                )}
+                                </div>
+                                <div className='campsite-like-count'>{campsite.campsitelikes_count} People liked this
+                                </div>
+                            </div>
 
-                        <div className='campsitelike-icon'>
-                            <i className={`fa fa-heart ${isLiked ? "active" : ""}`}
-                                onClick={handleLikeClick}>
-                            </i>
-                            {console.log('checkIsLiked',isLiked)}
-                        </div>
-                        <div>{campsite.campsitelikes_count} People liked this
+
                         </div>
                     </div>
-
-
-                </div>
-            </div>
-            {/* {loggedInUser && !userReview ?
+                    {/* {loggedInUser && !userReview ?
                 (<div className='review-btn-container'>
 
                     <OpenModalButton buttonText={"Write a Review"} modalComponent={<CreateReview campsiteId={campsiteId} />}
@@ -148,118 +170,118 @@ const SingleCampsite = () => {
                 </div>
                 ) : null
             } */}
-            <div className='single-campsite'>
-                <div className='address-phone-container'>
-                    <h3 className='phone-text'>Phone Number</h3>
-                    <div className='phonenumber'><img className='phone-icon' src={phone} />{campsite.phone_number}</div>
-                    <h3 className='address-text'>Address</h3>
-                    <div className='address'><img className='map-icon' src={map} />{campsite.address}</div>
-                </div>
-                <div className='hours-container'>
-                    <h3 className='hours-text'>Hours</h3>
-                    <div className='hours-open'>
-                        Hours Open {campsite.hours_open}
-                        {/* {console.log(campsite.hours_close)} */}
-                    </div>
-                    <div className='hours-close'>
-                        Hours Closed {campsite.hours_close}
-                        {/* {console.log(campsite.hours_close)} */}
-                    </div>
-                </div>
-                <div className='campsite-tips'>
-                    <div><h2>Essential Camping Gear</h2></div>
-                    <div className='tent'><img src={tent} /><p>The tent: If your budget can go a little bigger, then go bigger with
-                        your tent: A 3-person tent gives a cozy couple a little extra breathing room, and a family
-                        of four can more easily achieve harmony in a 6-person tent. You can also check the tent’s
-                        peak height if you want a tent that you can stand up in (that can make getting dressed and
-                        moving around easier to do). Vestibules outside the doors are nice for stowing muddy shoes
-                        and having two doors can help you avoid climbing over sleeping tentmates for late-night
-                        bathroom breaks.</p>
-                    </div>
-                    <div className='sleep'><img src={sleep} /><p>The sleeping bag: When selecting your bag, temperature rating is a good
-                        place to start. If you're planning on only going fair-weather camping, a summer bag is probably
-                        all you'll need, but a 3-season bag will give you more leeway for unpredictable shoulder-season
-                        weather. If you're always cold (or always hot), adjust accordingly. And no need to go with a
-                        super-snug mummy bag like backpackers use, when a rectangular camping bag will give your body
-                        more room to roam.</p>
-                    </div>
-                    <div className='sleep-pad'><img src={pad} /><p>The sleeping pad: A good sleeping pad is like the mattress on a bed,
-                        but it also has high-tech insulation to prevent you from losing body heat on the cold ground.
-                        Big air mattresses, like what your guests sleep on at home, might look temptingly plush, but
-                        their lack of insulation will likely leave you feeling cold. Take a look at specs when comparing
-                        sleeping pads—if one is thicker, longer or wider and has a higher insulation value
-                        (known as the R-value) — it will be more comfortable and warmer.</p>
-                    </div>
-                    <div className='light'><img src={lantern} /><p>Lighting: Campsites don't have illumination, so you have to bring your own.
-                        A flashlight is OK, but a headlamp frees up your hands for camp tasks. A lantern is nice for ambient
-                        light. (You can also build a campfire, but watch for fire restrictions.)</p>
-                    </div>
-                    <div className='stove'><img src={stove} /><p>Stove: A classic two-burner propane camp stove should do the trick.
-                        You won't spend a fortune and you can cook breakfast and prepare your morning brew at the same time.
-                        Bring at least a couple of fuel canisters and a lighter, and fire it up once at home to be sure you know
-                        how it works.</p>
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <div className='review-title'><h3>See what the community think about this campsite</h3></div>
-            <div className='overall-rating'>
-                <p>Overall rating</p>
-                {campsiteReviews.length > 0 ? (
-                    avgStars(campsite.reviews)) : (<p>No Reviews, be the first to write one!</p>)}
-
-                {campsite.reviews_count === 1 ?
-                    (<h3>({campsite.reviews_count} review)</h3>)
-                    : ''}
-                {campsite.reviews_count > 1 ?
-                    (<h3>({campsite.reviews_count} reviews)</h3>)
-                    : ''}
-            </div>
-            {loggedInUser && !userReview ?
-                (<div className='review-btn-container'>
-
-                    <OpenModalButton buttonText={"Write a Review"} modalComponent={<CreateReview campsiteId={campsiteId} />}
-                    />
-
-                </div>
-                ) : null
-            }
-            {campsiteReviews.length > 0 ? (
-                <div className='Reviews-container'>
-                    {campsiteReviews.map(review => (
-                        <div className='review' key={review.id}>
-                            <div className='review-name'>{review.username}</div>
-                            <div className='review-rating'>{review.stars === 1 ? (<p><i className="fa fa-star" /></p>) : ''}
-                                {review.stars === 2 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
-                                {review.stars === 3 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
-                                {review.stars === 4 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
-                                {review.stars === 5 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
+                    <div className='single-campsite'>
+                        <div className='address-phone-container'>
+                            <h3 className='phone-text'>Phone Number</h3>
+                            <div className='phonenumber'><img className='phone-icon' src={phone} />{campsite.phone_number}</div>
+                            <h3 className='address-text'>Address</h3>
+                            <div className='address'><img className='map-icon' src={map} />{campsite.address}</div>
+                        </div>
+                        <div className='hours-container'>
+                            <h3 className='hours-text'>Hours</h3>
+                            <div className='hours-open'>
+                                Hours Open {campsite.hours_open}
+                                {/* {console.log(campsite.hours_close)} */}
                             </div>
-                            <div className='review-date'>{review.created_at}</div>
-                            <div className='review-text'>{review.review_text}</div>
-                            <div className='edit-delete-container'>
-                                {loggedInUser?.id === review.user_id ?
-                                    <div className='review-delete'><OpenModalButton buttonText='Delete Review' modalComponent={<DeleteReview campsiteId={campsiteId} review={review} />} /></div>
-                                    : null}
-                                {loggedInUser?.id === review.user_id ?
-                                    <div className='review-edit'><OpenModalButton buttonText='Edit Review' modalComponent={<EditReview campsiteId={campsiteId} review={review} />} /></div>
-                                    : null}
-                            </div>
-                            <div className='like-container'>
-                                <div className='like-button-container'>
-                                    <Like review={review} />
-                                </div>
-                                <div>{review.likes_count} People liked this
-                                </div>
+                            <div className='hours-close'>
+                                Hours Closed {campsite.hours_close}
+                                {/* {console.log(campsite.hours_close)} */}
                             </div>
                         </div>
-                    ))}
+                        <div className='campsite-tips'>
+                            <div><h2>Essential Camping Gear</h2></div>
+                            <div className='tent'><img src={tent} /><p>The tent: If your budget can go a little bigger, then go bigger with
+                                your tent: A 3-person tent gives a cozy couple a little extra breathing room, and a family
+                                of four can more easily achieve harmony in a 6-person tent. You can also check the tent’s
+                                peak height if you want a tent that you can stand up in (that can make getting dressed and
+                                moving around easier to do). Vestibules outside the doors are nice for stowing muddy shoes
+                                and having two doors can help you avoid climbing over sleeping tentmates for late-night
+                                bathroom breaks.</p>
+                            </div>
+                            <div className='sleep'><img src={sleep} /><p>The sleeping bag: When selecting your bag, temperature rating is a good
+                                place to start. If you're planning on only going fair-weather camping, a summer bag is probably
+                                all you'll need, but a 3-season bag will give you more leeway for unpredictable shoulder-season
+                                weather. If you're always cold (or always hot), adjust accordingly. And no need to go with a
+                                super-snug mummy bag like backpackers use, when a rectangular camping bag will give your body
+                                more room to roam.</p>
+                            </div>
+                            <div className='sleep-pad'><img src={pad} /><p>The sleeping pad: A good sleeping pad is like the mattress on a bed,
+                                but it also has high-tech insulation to prevent you from losing body heat on the cold ground.
+                                Big air mattresses, like what your guests sleep on at home, might look temptingly plush, but
+                                their lack of insulation will likely leave you feeling cold. Take a look at specs when comparing
+                                sleeping pads—if one is thicker, longer or wider and has a higher insulation value
+                                (known as the R-value) — it will be more comfortable and warmer.</p>
+                            </div>
+                            <div className='light'><img src={lantern} /><p>Lighting: Campsites don't have illumination, so you have to bring your own.
+                                A flashlight is OK, but a headlamp frees up your hands for camp tasks. A lantern is nice for ambient
+                                light. (You can also build a campfire, but watch for fire restrictions.)</p>
+                            </div>
+                            <div className='stove'><img src={stove} /><p>Stove: A classic two-burner propane camp stove should do the trick.
+                                You won't spend a fortune and you can cook breakfast and prepare your morning brew at the same time.
+                                Bring at least a couple of fuel canisters and a lighter, and fire it up once at home to be sure you know
+                                how it works.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className='review-title'><h3>See what the community think about this campsite</h3></div>
+                    <div className='overall-rating'>
+                        <p>Overall rating</p>
+                        {campsiteReviews.length > 0 ? (
+                            avgStars(campsite.reviews)) : (<p>No Reviews, be the first to write one!</p>)}
+
+                        {campsite.reviews_count === 1 ?
+                            (<h3>({campsite.reviews_count} review)</h3>)
+                            : ''}
+                        {campsite.reviews_count > 1 ?
+                            (<h3>({campsite.reviews_count} reviews)</h3>)
+                            : ''}
+                    </div>
+                    {loggedInUser && !userReview ?
+                        (<div className='review-btn-container'>
+
+                            <OpenModalButton buttonText={"Write a Review"} modalComponent={<CreateReview campsiteId={campsiteId} />}
+                            />
+
+                        </div>
+                        ) : null
+                    }
+                    {campsiteReviews.length > 0 ? (
+                        <div className='Reviews-container'>
+                            {campsiteReviews.map(review => (
+                                <div className='review' key={review.id}>
+                                    <div className='review-name'>{review.username}</div>
+                                    <div className='review-rating'>{review.stars === 1 ? (<p><i className="fa fa-star" /></p>) : ''}
+                                        {review.stars === 2 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
+                                        {review.stars === 3 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
+                                        {review.stars === 4 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
+                                        {review.stars === 5 ? (<p><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /><i className="fa fa-star" /></p>) : ''}
+                                    </div>
+                                    <div className='review-date'>{review.created_at}</div>
+                                    <div className='review-text'>{review.review_text}</div>
+                                    <div className='edit-delete-container'>
+                                        {loggedInUser?.id === review.user_id ?
+                                            <div className='review-delete'><OpenModalButton buttonText='Delete Review' modalComponent={<DeleteReview campsiteId={campsiteId} review={review} />} /></div>
+                                            : null}
+                                        {loggedInUser?.id === review.user_id ?
+                                            <div className='review-edit'><OpenModalButton buttonText='Edit Review' modalComponent={<EditReview campsiteId={campsiteId} review={review} />} /></div>
+                                            : null}
+                                    </div>
+                                    <div className='like-container'>
+                                        <div className='like-button-container'>
+                                            <Like review={review} isLiked={isLiked}/>
+                                        </div>
+                                        <div>{review.likes_count} People liked this
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (null)}
+
+                    <About />
                 </div>
-            ) : (null)}
-            
-            <About />
-        </div>
-         )}
+            )}
         </div>
     )
 

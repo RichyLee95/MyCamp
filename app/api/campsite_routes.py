@@ -44,7 +44,7 @@ def search_campsites():
         return "Please provide a keyword for search."
 
   search_campsites = Campsite.query.filter(
-        (Campsite.title.like(f"%{keyword}%"))
+        (Campsite.title.ilike(f"%{keyword}%"))
     ).all()
   response_campsites = [campsite.to_dict() for campsite in search_campsites]
   print(response_campsites)
