@@ -15,11 +15,15 @@
     object-fit: cover;
   }
   .text-image{
-position: absolute;
-top:120px;
-left:320px;
-
-
+    position: absolute; /* Position the text-image absolutely within .single-campsite-title */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* color: white; */
+    padding: 20px;
+    padding-right: 400px;
+    text-align: center;
   }
   .text-image .fa-star{
     background-color: orange;
@@ -50,6 +54,7 @@ height: 20px;
   }
   .single-campsite-title{
 width:100%;
+position: relative;
   }
   .single-campsite-title p {
     font-size: 14px;
@@ -285,3 +290,13 @@ height: 20px;
     width:15px;
     cursor: pointer;
   }
+  .fa-heart.active{
+    color:red;
+    cursor: pointer;
+  }
+.campsite-like-count{
+  color:white;
+}
+.fa-heart{
+  cursor: pointer;
+}

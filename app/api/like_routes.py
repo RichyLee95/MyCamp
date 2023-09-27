@@ -33,6 +33,14 @@ def get_user_likes():
     response_user_likes=[like.to_dict() for like in user_likes]
     return {"likes":response_user_likes}
 
+@like_routes.route('/review-is-liked/<int:review_id>', methods=['GET'])
+@login_required
+def review_is_liked(review_id):
+    '''Check if the campsite is liked by the current user'''
+    review_is_liked = Like.query.filter_by(user_id=current_user.id, review_id=review_id).first()
+    # is_liked_response = [campsitelike.to.dict() for campsitelike in is_liked]
+    return jsonify({"review_is_liked": bool(review_is_liked)})
+
 @like_routes.route('/<int:review_id>/likes',methods=['POST'])
 @login_required
 def add_like(review_id):
