@@ -51,18 +51,35 @@ def add_like(campsite_id):
     db.session.commit()
     return new_campsitelike.to_dict()
 
-@campsitelike_routes.route('/<int:campsitelikeid>',methods=['DELETE'])
+@campsitelike_routes.route('/is-liked/<int:campsite_id>', methods=['GET'])
 @login_required
-def remove_campsitelike(campsitelikeid):
+def is_liked(campsite_id):
+    '''Check if the campsite is liked by the current user'''
+    is_liked = CampsiteLike.query.filter_by(user_id=current_user.id, campsite_id=campsite_id).first()
+    # is_liked_response = [campsitelike.to.dict() for campsitelike in is_liked]
+    print('ERRORRR BIG DICKUS',is_liked)
+    return jsonify({"is_liked": bool(is_liked)})
+    
+@campsitelike_routes.route('/<int:campsite_id>',methods=['DELETE'])
+@login_required
+def remove_campsitelike(campsite_id):
     '''
     unlike
     '''
-    campsitelike_delete = CampsiteLike.query.get(campsitelikeid)
+    like = CampsiteLike.query.filter_by(user_id=current_user.id, campsite_id=campsite_id).first()
 
-
-    if campsitelike_delete.users.id != current_user.id:
-        return jsonify({'error': 'You are not authorized to unlike'}), 401
-
-    db.session.delete(campsitelike_delete)
+    if not like:
+        likes = CampsiteLike.query.filter_by(user_id=current_user.id).all()
+        liked_campsites = [like.campsites.to_dict() for like in likes]
+        return jsonify(message="Like not found!"), 404
+    db.session.delete(like)
     db.session.commit()
-    return {"message": "Like Successfully deleted"}
+    likes = CampsiteLike.query.filter_by(user_id=current_user.id).all()
+    liked_campsites = [like.campsites.to_dict() for like in likes]
+    return jsonify(likes=liked_campsites, message="Removed like"), 200    
+    # if campsitelike_delete.users.id != current_user.id:
+    #     return jsonify({'error': 'You are not authorized to unlike'}), 401
+
+    # db.session.delete(campsitelike_delete)
+    # db.session.commit()
+    # return {"message": "Like Successfully deleted"}

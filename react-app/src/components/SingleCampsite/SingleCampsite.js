@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchSingleCampsite } from '../../store/campsite';
 import { useParams } from 'react-router-dom';
 import { fetchAllReviews } from '../../store/review';
@@ -20,6 +20,9 @@ import About from '../Footer/Footer';
 import defaultimg from '../../images/default-img.png'
 import Like from '../Likes/index'
 import CampsiteLike from '../CampsiteLikes/CampsiteLike';
+import LoadingScreen from '../Loading/Loading';
+// import { checkIsLiked } from '../../store/campsitelike';
+import { checkIsLiked, fetchCampsiteLikes, fetchUserCampsiteLikes, thunkAddCampsiteLike, thunkRemoveLike } from '../../store/campsitelike';
 const SingleCampsite = () => {
     const dispatch = useDispatch()
     const { campsiteId } = useParams()
@@ -29,8 +32,15 @@ const SingleCampsite = () => {
     const campsiteReviews = reviews.filter(review => review.campsite_id === parseInt(campsiteId))
     const loggedInUser = useSelector((state) =>
         state.session.user)
-
+    const loggedInUserId = useSelector((state) => state.session.user && state.session.user.id);
     const userReview = campsiteReviews.find(review => review.user_id === loggedInUser?.id)
+    const userCampsiteLikes = useSelector((state) => state.campsitelikes.userCampsiteLikes);
+    const [isLiked, setIsLiked] = useState('');
+    const campsitelike = userCampsiteLikes.find((campsitelike) => campsitelike.campsite_id === campsite.id);
+    const campsitelikeId = campsitelike ? campsitelike.id : null;
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
     const avgStars = (campsiteReviews) => {
         const totalStars = campsiteReviews?.reduce((sum, review) => sum + review.stars, 0)
         const avgRating = totalStars / campsiteReviews?.length
@@ -48,14 +58,57 @@ const SingleCampsite = () => {
         }
         return starsArray
     }
+    const handleLikeClick = async (e) => {
+        e.preventDefault()
+        if (isLiked) {
+            // Unlike the review
+            await dispatch(thunkRemoveLike(campsiteId));
+            if (loggedInUserId) { await dispatch(fetchUserCampsiteLikes(loggedInUserId)) }
+            await dispatch(fetchCampsiteLikes(campsiteId))
+            await dispatch(fetchSingleCampsite(campsiteId))
+            setIsLiked(false);
+        } else {
+            // Like the review
+            const data = await dispatch(thunkAddCampsiteLike(campsiteId));
+            // setLikeId(data.id)
+            await dispatch(fetchUserCampsiteLikes(loggedInUserId))
+            await dispatch(fetchCampsiteLikes(campsiteId))
+            await dispatch(fetchSingleCampsite(campsiteId))
+            setIsLiked(true);
+        }
+    };
     useEffect(() => {
+        
+        
+        const fetchData = async () => {
+            try {
+                // dispatch(checkIsLiked())
+                if (loggedInUserId) { await dispatch(fetchUserCampsiteLikes(loggedInUserId))}
+               await dispatch(fetchCampsiteLikes(campsiteId))
+               await dispatch(fetchSingleCampsite(campsiteId))
+               await dispatch(fetchAllReviews())
+                const isLikedChecked = await dispatch(checkIsLiked(campsite.id));
+                // console.log("Favorited status from action:", favorited);
+                setIsLiked(isLikedChecked);
+            } catch (error) {
+                console.error("Failed to fetch campsitelike status:", error);
+                setError(error);
+            }
+        }
+        setTimeout(() => {
+            setIsLoading(false); // Set isLoading to false when data is loaded
+         
+        }, 2000);
+        fetchData() 
+    }, [dispatch,loggedInUserId,campsiteId,campsite.id])
 
-        dispatch(fetchSingleCampsite(campsiteId))
-        dispatch(fetchAllReviews())
-    }, [dispatch])
-    if (!campsite) return null
     return (
         <div className='single-campsite-container'>
+            {isLoading ? (
+        <LoadingScreen /> // Render the loading screen while isLoading is true
+      ) : (
+        // Render the campsite content when isLoading is false
+        <div>
             <div className='single-campsite-title'>
                 <img className='campsite-image' src={campsite.image} onError={(e) => { e.target.src = defaultimg; }} />
                 <div className='text-image'>
@@ -71,12 +124,17 @@ const SingleCampsite = () => {
                         (<h3 className='review-title'>({campsite.reviews_count} reviews)</h3>)
                         : ''}
 
-                        <div className='campsite-like'>
-                        <CampsiteLike campsite={campsite} />
-                                    
-                                <div>{campsite.campsitelikes_count} People liked this
-                                </div>
+                    <div className='campsite-like'>
+
+                        <div className='campsitelike-icon'>
+                            <i className={`fa fa-heart ${isLiked ? "active" : ""}`}
+                                onClick={handleLikeClick}>
+                            </i>
+                            {console.log('checkIsLiked',isLiked)}
                         </div>
+                        <div>{campsite.campsitelikes_count} People liked this
+                        </div>
+                    </div>
 
 
                 </div>
@@ -188,9 +246,9 @@ const SingleCampsite = () => {
                                     : null}
                             </div>
                             <div className='like-container'>
-                                    <div className='like-button-container'>
-                                        <Like review={review} />
-                                    </div>
+                                <div className='like-button-container'>
+                                    <Like review={review} />
+                                </div>
                                 <div>{review.likes_count} People liked this
                                 </div>
                             </div>
@@ -198,7 +256,10 @@ const SingleCampsite = () => {
                     ))}
                 </div>
             ) : (null)}
+            
             <About />
+        </div>
+         )}
         </div>
     )
 
