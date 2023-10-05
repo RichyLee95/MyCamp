@@ -48,7 +48,6 @@ const Like = ({ review }) => {
         await dispatch(fetchUserLikes(loggedInUserId))
         await dispatch(fetchAllReviews())
         setIsLiked(true);
-        
       }
   };
 useEffect(() =>{
