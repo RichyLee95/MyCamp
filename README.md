@@ -20,30 +20,30 @@ MyCamp is a Yelp inspired website where you can find campsites and leave reviews
 
 ### Create a Campsite
 ![mycamp create](https://github.com/RichyLee95/MyCamp/assets/123135524/1d040e25-f867-49dd-9249-89e03794a71a)
-Input campsite name, address, hours open and close, phone number, preview image and banner.
+- Input campsite name, address, hours open and close, phone number, preview image and banner.
 ### View Campsite
 ![myCamp](https://github.com/RichyLee95/MyCamp/assets/123135524/07def14d-626d-4500-b232-0f02e98105b4)
-Main splash page displaying campsites, users can select individual campsites and view its address, hours open and close, and phone number.
+- Main splash page displaying campsites, users can select individual campsites and view its address, hours open and close, and phone number.
 ### Edit a Campsite
-Edit the campsite's name, address, hours open and close, phone number, preview image and banner. Preview image and banner are optional on edits.
+- Edit the campsite's name, address, hours open and close, phone number, preview image and banner. Preview image and banner are optional on edits.
 ### Delete a Campsite
-Delete your campsite along with reviews associated it in the campsite.
+- Delete your campsite along with reviews associated it in the campsite.
 ### Search Campsites
 ![Screenshot 2023-10-16 155820](https://github.com/RichyLee95/MyCamp/assets/123135524/3a78303a-8944-4b66-8fd0-fbac62a550ed)
-Search for campsites by name
+- Search for campsites by name
 ### Create a Review
 ![Screenshot 2023-10-16 154050](https://github.com/RichyLee95/MyCamp/assets/123135524/d4b42245-c6d7-40d4-b83a-3443071dea8a)
-Reviews are created when logged in and viewing a specific campsite.
+- Reviews are created when logged in and viewing a specific campsite.
 ### View a Review
 ![Screenshot 2023-10-16 160208](https://github.com/RichyLee95/MyCamp/assets/123135524/fc407e3b-e120-4b41-a07f-b2f46ec62952)
-Reviews can be seen when on a specific campsite page.
+- Reviews can be seen when on a specific campsite page.
 ### Edit a Review
-Edit your review for a campsite.
+- Edit your review for a campsite.
 ### Delete a Review
-Delete your review for a campsite.
+- Delete your review for a campsite.
 ### Like a Review
-Click on the heart icon on a review to like the review
+- Click on the heart icon on a review to like the review
 ### Unlike a Review
-Click on the filled heart icon on a review to unlike the review
+- Click on the filled heart icon on a review to unlike the review
 ## Contact Me
 [LinkedIn] (https://www.linkedin.com/in/richard-lee-335389236/)
