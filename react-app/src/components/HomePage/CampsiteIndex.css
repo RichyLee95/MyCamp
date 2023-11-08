@@ -98,6 +98,9 @@ color:white;
 width:20px;
 height: 20px;
 align-items: center;
+line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
 
   }
   .average-rating-stars .fa-star-half{
@@ -105,11 +108,16 @@ align-items: center;
     color:white;
     width:20px;
 height: 20px;
+line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   .average-rating-stars .fa-star-o{
     background-color: orange;
     color:white;
-    
+    line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   .campsite-index .fa-star {
     background-color: orange;
@@ -117,6 +125,9 @@ height: 20px;
     width: 20px;
     height: 20px;
     align-items: center;
+    line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   
   .campsite-index .fa-star-half {
@@ -124,9 +135,15 @@ height: 20px;
     color: white;
     width: 20px;
     height: 20px;
+    line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   
   .campsite-index .fa-star-o {
     background-color: orange;
     color: white;
+    line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }

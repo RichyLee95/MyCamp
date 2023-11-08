@@ -31,18 +31,25 @@ color:white;
 width:20px;
 height: 20px;
 align-items: center;
-
+line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   .text-image .fa-star-half{
     background-color: orange;
     color:white;
     width:20px;
 height: 20px;
+line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   .text-image .fa-star-o{
     background-color: orange;
     color:white;
-    
+    line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   .review-title{
     color:white
@@ -195,6 +202,9 @@ color:white;
 width:20px;
 height: 20px;
 align-items: center;
+line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
 
   }
   .overall-rating .fa-star-half{
@@ -202,11 +212,16 @@ align-items: center;
     color:white;
     width:20px;
 height: 20px;
+line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   .overall-rating .fa-star-o{
     background-color: orange;
     color:white;
-    
+    line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   .review-rating .fa-star{
     background-color: orange;
@@ -214,17 +229,25 @@ color:white;
 width:20px;
 height: 20px;
 align-items: center;
-
+line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   .review-rating .fa-star-half{
     background-color: orange;
     color:white;
     width:20px;
 height: 20px;
+line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
   }
   .review-rating .fa-star-o{
     background-color: orange;
     color:white;
+    line-height: 20px; 
+text-align: center; 
+margin-right: 2px; 
     
   }
   .campsite-tips {
